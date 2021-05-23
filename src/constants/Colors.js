@@ -1,0 +1,7 @@
+export default {
+  PRIMARY_COLOR: "#440a67",
+  ACCENT_COLOR: "#93329e",
+  LIGHT_ACCENT_COLOR: "#b4aee8",
+  HIGHLIGHT_COLOR: "#ee99a0",
+  CANCEL_COLOR: "#f55c47",
+};
