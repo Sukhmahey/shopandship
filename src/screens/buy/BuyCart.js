@@ -78,7 +78,7 @@ const BuyCart = ({ navigation }) => {
         </View>
 
         <OkButtonComponent
-          text="Pay"
+          text="Checkout"
           onPress={() => {
             navigation.goBack();
           }}

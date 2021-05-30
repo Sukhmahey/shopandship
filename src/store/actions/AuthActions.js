@@ -70,6 +70,7 @@ const onGoogleButtonPress = async (dispatch) => {
 
 const getCurrentUser = async (dispatch) => {
   const currentUser = await GoogleSignin.getCurrentUser().then((data) => {
+    console.log("Current User", auth().currentUser.uid);
     const uid = auth().currentUser.uid;
     const payload = {
       uid: uid,

@@ -228,6 +228,7 @@ const CreateProductScreen = ({ navigation, route }) => {
                       <Picker.Item label="/packet" value="pkt" />
                       <Picker.Item label="/Unit" value="unit" />
                       <Picker.Item label="/Item" value="item" />
+                      <Picker.Item label="/Piece" value="piece" />
                     </Picker>
                   }
                 />
