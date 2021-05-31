@@ -1,0 +1,131 @@
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  Platform,
+  TouchableNativeFeedback,
+  Keyboard,
+  ColorPropType,
+} from "react-native";
+
+import CardView from "react-native-cardview";
+import Dimens from "../../constants/Dimens";
+import Color from "../../constants/Colors";
+import OkButtonComponent from "../OkButtonComponent";
+import { Entypo } from "@expo/vector-icons";
+
+import { useSelector, useDispatch } from "react-redux";
+import { AddToSellDeliveredOrders } from "../../store/actions/SellAOrdersActions";
+import { RemoveFromBuyAOrders } from "../../store/actions/BuyAOrdersActions";
+
+const SellOrdersComponent = ({
+  photo,
+  unit,
+  name,
+  price,
+  desc,
+  productId,
+  shopId,
+  shopUid,
+  amount,
+  color,
+  uid,
+}) => {
+  const [counter, setCounter] = useState(amount / price);
+  const dispatch = useDispatch();
+
+  const Delivered = () => {
+    dispatch(AddToSellDeliveredOrders(shopId));
+    dispatch(RemoveFromBuyAOrders(productId));
+  };
+
+  return (
+    <View style={styles.screen}>
+      <CardView
+        cardElevation={6}
+        cardMaxElevation={6}
+        cornerRadius={6}
+        style={{ flex: 1, padding: 5, borderWidth: 3, borderColor: "orange" }}
+      >
+        <View style={styles.viewsContainer}>
+          <View style={styles.imageContainer}>
+            <CardView cardElevation={6} cardMaxElevation={6} cornerRadius={6}>
+              <Image
+                style={{ resizeMode: "center", height: "100%", width: "100%" }}
+                source={{
+                  uri: photo,
+                }}
+              />
+            </CardView>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.titleText}>{name}</Text>
+            <Text style={styles.text}>
+              Price : {price}/{unit}
+            </Text>
+            <Text style={styles.text}>Description: {desc}</Text>
+            <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
+          </View>
+        </View>
+      </CardView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  counterContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  counterText: {
+    color: "black",
+    fontSize: 18,
+  },
+  numberContainer: {
+    borderWidth: 2,
+    borderRadius: 6,
+    borderColor: Color.PRIMARY_COLOR,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    width: 100,
+  },
+  screen: {
+    width: "100%",
+    height: Dimens.height / 3.5,
+    borderColor: Color.PRIMARY_COLOR,
+    borderWidth: 3,
+    borderRadius: 6,
+    marginBottom: 10,
+  },
+  viewsContainer: {
+    borderRadius: 6,
+    padding: 5,
+    flexDirection: "row",
+  },
+  textContainer: {
+    flex: 6,
+    padding: 10,
+  },
+  imageContainer: {
+    flex: 4,
+    marginVertical: 1,
+  },
+  titleText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "black",
+    flex: 1,
+  },
+  text: {
+    fontSize: 16,
+    color: "black",
+    flex: 1,
+  },
+});
+
+export default SellOrdersComponent;

@@ -12,7 +12,11 @@ import BuyShopReducer from "./src/store/reducers/BuyShopReducer";
 import BuyCartReducer from "./src/store/reducers/BuyCartReducer";
 import BuyPOrdersReducer from "./src/store/reducers/BuyPOrdersReducer";
 import BuyAOrdersReducer from "./src/store/reducers/BuyAOrdersReducer";
+import BuyDOrdersReducer from "./src/store/reducers/BuyDOrdersReducer";
 import SellOrdersReducer from "./src/store/reducers/SellOrdersReducer";
+import SellAOrdersReducer from "./src/store/reducers/SellAOrdersReducer ";
+import SellDOrdersReducer from "./src/store/reducers/SellDOrdersReducer";
+import MyShopIdReducer from "./src/store/reducers/MyShopIdReducer";
 
 const rootReducer = combineReducers({
   Auth: AuthReducer,
@@ -22,7 +26,11 @@ const rootReducer = combineReducers({
   BuyCart: BuyCartReducer,
   BuyPOrders: BuyPOrdersReducer,
   BuyAOrders: BuyAOrdersReducer,
+  BuyDOrders: BuyDOrdersReducer,
   SellOrders: SellOrdersReducer,
+  SellAOrders: SellAOrdersReducer,
+  SellDOrders: SellDOrdersReducer,
+  MyShopId: MyShopIdReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

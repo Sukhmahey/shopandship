@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, FlatList } from "react-native";
 
 import BuyDOrdersComponent from "../../components/orders/BuyDOrdersComponent";
 import Color from "../../constants/Colors";
@@ -22,7 +22,7 @@ const BuyDeliveredOrders = ({ navigation }) => {
   if (dOrders.length < 1) {
     return (
       <View style={styles.itemContainer}>
-        <Text style={styles.textEmpty}>No Delivered Orders Yet!</Text>
+        <Text style={styles.textEmpty}>No Delivered Orders Yet</Text>
       </View>
     );
   }
@@ -34,7 +34,7 @@ const BuyDeliveredOrders = ({ navigation }) => {
           data={dOrders}
           renderItem={({ item }) => {
             return (
-              <BuyAOrdersComponent
+              <BuyDOrdersComponent
                 name={item.productName}
                 photo={item.productPhoto}
                 price={item.productPrice}
