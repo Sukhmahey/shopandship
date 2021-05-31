@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-import { Alert, View } from "react-native";
 import firestore from "@react-native-firebase/firestore";
-import storage from "@react-native-firebase/storage";
 import { getAsyncData } from "../../api/AsyncData";
 
 export const BUY_GET_ALL_SHOPS = "buy_get_all_shops";
@@ -9,6 +6,7 @@ export const GET_CART_FROM_FIREBASE = "get_cart_from_firebase";
 export const REMOVE_FROM_CART = "remove_from _cart";
 export const UPDATE_CART_PRICE = "update_cart_price";
 export const UPDATE_TOTAL_CART_PRICE = "update_total_cart_price";
+export const CLEAR_CART = "clear_cart";
 
 export const GetCartFromFirebase = () => {
   return async (dispatch) => {
@@ -134,6 +132,53 @@ export const UpdateTotalCartPrice = (amount) => {
     dispatch({
       type: UPDATE_TOTAL_CART_PRICE,
       amount: amount,
+    });
+  };
+};
+
+export const EmptyFirebaseCart = () => {
+  return async (dispatch) => {
+    const data = await getAsyncData();
+    if (data !== null) {
+      const uid = data.uid;
+      firestore()
+        .collection("users")
+        .doc(`${uid}`)
+        .collection("cart")
+        .onSnapshot(onResult, onError);
+
+      function onResult(QuerySnapshot) {
+        QuerySnapshot.forEach((element) => {
+          firestore()
+            .collection("users")
+            .doc(`${uid}`)
+            .collection("cart")
+            .doc(element.id)
+            .delete()
+            .then(() => {
+              // dispatch({
+              //   type: REMOVE_FROM_CART,
+              //   productId: productId,
+              // });
+              // console.log("Removed From Cart");
+            })
+            .catch((e) => {
+              console.log("error removing from cart", e);
+            });
+        });
+      }
+
+      function onError(error) {
+        console.error(error);
+      }
+    }
+  };
+};
+
+export const ClearCart = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: CLEAR_CART,
     });
   };
 };

@@ -4,6 +4,7 @@ import {
   REMOVE_FROM_CART,
   UPDATE_CART_PRICE,
   UPDATE_TOTAL_CART_PRICE,
+  CLEAR_CART,
 } from "../actions/BuyCartActions";
 const initialState = {
   cartProducts: [],
@@ -46,6 +47,8 @@ const BuyCartReducer = (state = initialState, actions) => {
 
     case UPDATE_TOTAL_CART_PRICE:
       return { ...state, cartPrice: actions.amount };
+    case CLEAR_CART:
+      return { ...state, cartProducts: [] };
 
     default:
       return state;

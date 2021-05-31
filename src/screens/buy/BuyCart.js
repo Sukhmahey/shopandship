@@ -10,11 +10,18 @@ import BuyCartComponent from "../../components/cart/BuyCartComponent";
 import LoadingScreenComponent from "../../components/LoadingScreenComponent";
 
 import { useSelector, useDispatch } from "react-redux";
+import {
+  ClearCart,
+  EmptyFirebaseCart,
+} from "../../store/actions/BuyCartActions";
+import { AddToBuyersPOrders } from "../../store/actions/BuyPOrdersActions";
 
 import Color from "../../constants/Colors";
 
 const BuyCart = ({ navigation }) => {
   const [payableAmount, setPayableAmount] = useState(0);
+
+  const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.BuyCart.cartProducts);
   console.log("Cart Prods", allProducts);
 
@@ -25,6 +32,12 @@ const BuyCart = ({ navigation }) => {
     });
     setPayableAmount(amount);
   }, [allProducts]);
+
+  const Checkout = () => {
+    dispatch(AddToBuyersPOrders());
+    dispatch(ClearCart());
+    dispatch(EmptyFirebaseCart());
+  };
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -80,7 +93,8 @@ const BuyCart = ({ navigation }) => {
         <OkButtonComponent
           text="Checkout"
           onPress={() => {
-            navigation.goBack();
+            Checkout();
+            // navigation.goBack();
           }}
           style={{
             flex: 1,
