@@ -2,6 +2,7 @@ import firestore from "@react-native-firebase/firestore";
 import { getAsyncData } from "../../api/AsyncData";
 
 export const Get_P_ORDERS = "get_p_orders";
+export const REMOVE_FROM_BUY_PORDERS = "remove_p_orders";
 
 export const AddToBuyersPOrders = () => {
   return async (dispatch) => {
@@ -64,6 +65,7 @@ const AddToSellersPOrders = (Pdata) => {
         .collection("pendingOrders")
         .doc(Pdata.productId)
         .set({
+          uid: uid,
           shopUid: Pdata.shopUid,
           shopId: Pdata.shopId,
           productId: Pdata.productId,
@@ -105,6 +107,32 @@ export const GetPOrdersFromFirebase = () => {
       function onError(error) {
         console.error(error);
       }
+    }
+  };
+};
+
+export const RemoveFromBuyPOrders = (productId) => {
+  return async (dispatch) => {
+    const data = await getAsyncData();
+    if (data !== null) {
+      const uid = data.uid;
+
+      firestore()
+        .collection("users")
+        .doc(`${uid}`)
+        .collection("pendingOrders")
+        .doc(productId)
+        .delete()
+        .then(() => {
+          dispatch({
+            type: REMOVE_FROM_BUY_PORDERS,
+            productId: productId,
+          });
+          console.log("Removed From Pending Order");
+        })
+        .catch((e) => {
+          console.log("error removing from cart", e);
+        });
     }
   };
 };

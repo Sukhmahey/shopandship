@@ -18,6 +18,8 @@ import OkButtonComponent from "../OkButtonComponent";
 import { Entypo } from "@expo/vector-icons";
 
 import { useSelector, useDispatch } from "react-redux";
+import { AddToSellAcceptedOrders } from "../../store/actions/SellOrdersActions";
+import { RemoveFromBuyPOrders } from "../../store/actions/BuyPOrdersActions";
 
 const SellOrdersComponent = ({
   photo,
@@ -30,9 +32,15 @@ const SellOrdersComponent = ({
   shopUid,
   amount,
   color,
+  uid,
 }) => {
   const [counter, setCounter] = useState(amount / price);
   const dispatch = useDispatch();
+
+  const Accept = () => {
+    dispatch(AddToSellAcceptedOrders(shopId));
+    dispatch(RemoveFromBuyPOrders(productId));
+  };
 
   return (
     <View style={styles.screen}>
@@ -60,7 +68,12 @@ const SellOrdersComponent = ({
             </Text>
             <Text style={styles.text}>Description: {desc}</Text>
             <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
-            <OkButtonComponent text="Accept" />
+            <OkButtonComponent
+              text="Accept"
+              onPress={() => {
+                Accept();
+              }}
+            />
           </View>
         </View>
       </CardView>

@@ -77,7 +77,10 @@ const ShopSellCardComponent = ({
             onPress={() => {
               nav.navigate("Orders", {
                 screen: "Pending Orders",
-                params: { shopId: shopId },
+                params: {
+                  screen: "SellPendingOrders",
+                  params: { shopId: shopId },
+                },
               });
             }}
           />

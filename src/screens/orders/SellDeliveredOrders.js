@@ -11,6 +11,13 @@ const SellDeliveredOrders = ({ navigation }) => {
     // Return the function to unsubscribe from the event so it gets removed on unmount
     return unsubscribe;
   }, [navigation]);
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: "Cart",
+      headerShown: true,
+      headerTintColor: Color.PRIMARY_COLOR,
+    });
+  }, [navigation]);
   return (
     <View>
       <Text>Delivered Orders</Text>

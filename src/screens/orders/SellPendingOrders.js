@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { View, StyleSheet, Text, FlatList } from "react-native";
 
 import Color from "../../constants/Colors";
+import DrawerIconComponent from "../../components/DrawerIconComponent";
 
 import { useSelector, useDispatch } from "react-redux";
 import { GetSellPOrdersFromFirebase } from "../../store/actions/SellOrdersActions";
@@ -21,6 +22,15 @@ const SellPendingOrders = ({ navigation, route }) => {
     // Return the function to unsubscribe from the event so it gets removed on unmount
     return unsubscribe;
   }, [navigation]);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: "Cart",
+      headerShown: true,
+      headerTintColor: Color.PRIMARY_COLOR,
+    });
+  }, [navigation]);
+
   if (pOrders.length < 1) {
     return (
       <View style={styles.itemContainer}>
@@ -43,9 +53,10 @@ const SellPendingOrders = ({ navigation, route }) => {
                 unit={item.productUnit}
                 desc={item.productDescription}
                 productId={item.productId}
-                shopId={item.shopId}
+                shopId={shopId}
                 shopUid={item.uid}
                 amount={item.amount}
+                uid={item.uid}
               />
             );
           }}
