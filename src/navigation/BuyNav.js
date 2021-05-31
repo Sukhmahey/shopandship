@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import BuyProductListScreen from "../screens/buy/BuyProductListScreen";
 import BuyCart from "../screens/buy/BuyCart";
-import BuyOrders from "../screens/buy/BuyOrders";
+import MyOrdersNav from "./MyOrdersNav";
 
 import Color from "../constants/Colors";
 
@@ -45,7 +45,7 @@ const BuyNav = () => {
     >
       <buyBottomTab.Screen name="BuyProductList" component={buyProductList} />
       <buyBottomTab.Screen name="BuyCart" component={buyCart} />
-      <buyBottomTab.Screen name="BuyOrders" component={buyOrders} />
+      <buyBottomTab.Screen name="MyOrders" component={MyOrdersNav} />
     </buyBottomTab.Navigator>
   );
 };

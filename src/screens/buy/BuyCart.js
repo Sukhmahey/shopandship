@@ -94,7 +94,6 @@ const BuyCart = ({ navigation }) => {
           text="Checkout"
           onPress={() => {
             Checkout();
-            // navigation.goBack();
           }}
           style={{
             flex: 1,

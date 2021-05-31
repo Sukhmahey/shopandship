@@ -93,7 +93,8 @@ const ProductBuyCardComponent = ({
                         unit,
                         productId,
                         shopId,
-                        shopUid
+                        shopUid,
+                        desc
                       )
                     );
                   }}

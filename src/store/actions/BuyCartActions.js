@@ -43,7 +43,8 @@ export const AddToCart = (
   unit,
   productId,
   shopId,
-  shopUid
+  shopUid,
+  desc
 ) => {
   return async (dispatch) => {
     const data = await getAsyncData();
@@ -62,6 +63,7 @@ export const AddToCart = (
           productPhoto: photo,
           productPrice: price,
           productUnit: unit,
+          productDescription: desc,
           amount: price,
         })
         .then(() => {
