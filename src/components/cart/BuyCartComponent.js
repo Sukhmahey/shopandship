@@ -22,7 +22,7 @@ import {
   UpdateCartAmount,
   RemoveFromCart,
   UpdateTotalCartPrice,
-} from "../../store/actions/BuyShopActions";
+} from "../../store/actions/BuyCartActions";
 
 const BuyCartComponent = ({
   photo,
@@ -35,7 +35,7 @@ const BuyCartComponent = ({
 }) => {
   const [counter, setCounter] = useState(amount / price);
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.BuyShop.cartProducts);
+  const allProducts = useSelector((state) => state.BuyCart.cartProducts);
 
   useEffect(() => {
     if (counter > 0) {

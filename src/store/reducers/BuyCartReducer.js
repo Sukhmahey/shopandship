@@ -4,25 +4,14 @@ import {
   REMOVE_FROM_CART,
   UPDATE_CART_PRICE,
   UPDATE_TOTAL_CART_PRICE,
-} from "../actions/BuyShopActions";
+} from "../actions/BuyCartActions";
 const initialState = {
-  allProducts: [],
   cartProducts: [],
   cartPrice: [],
 };
 
-const BuyShopReducer = (state = initialState, actions) => {
+const BuyCartReducer = (state = initialState, actions) => {
   switch (actions.type) {
-    case BUY_GET_ALL_SHOPS:
-      const buyProductIndex = state.allProducts.findIndex(
-        (prod) => prod.productId === actions.productData.productId
-      );
-      if (buyProductIndex < 0) {
-        const allobj = [...state.allProducts];
-        allobj.push(actions.productData);
-        return { ...state, allProducts: allobj };
-      }
-
     case GET_CART_FROM_FIREBASE:
       const cartProdIndex = state.cartProducts.findIndex(
         (cartProd) => cartProd.productId === actions.payload.productId
@@ -63,4 +52,4 @@ const BuyShopReducer = (state = initialState, actions) => {
   }
 };
 
-export default BuyShopReducer;
+export default BuyCartReducer;

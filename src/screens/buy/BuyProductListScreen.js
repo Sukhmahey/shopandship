@@ -13,20 +13,28 @@ import PlusIconComponent from "../../components/PlusIconComponent";
 
 import Color from "../../constants/Colors";
 
-import {
-  BuyGetAllShops,
-  GetCartFromFirebase,
-} from "../../store/actions/BuyShopActions";
+import { BuyGetAllShops } from "../../store/actions/BuyShopActions";
+import { GetCartFromFirebase } from "../../store/actions/BuyCartActions";
 import { useSelector, useDispatch } from "react-redux";
 
 const BuyProductListScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(BuyGetAllShops());
+    const unsubscribe = navigation.addListener("focus", () => {
+      dispatch(BuyGetAllShops());
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
   }, [navigation]);
 
   useEffect(() => {
-    dispatch(GetCartFromFirebase());
+    const unsubscribe = navigation.addListener("focus", () => {
+      dispatch(GetCartFromFirebase());
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
   }, [navigation]);
   const allProducts = useSelector((state) => state.BuyShop.allProducts);
 

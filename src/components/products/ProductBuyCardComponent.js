@@ -16,7 +16,7 @@ import Dimens from "../../constants/Dimens";
 import Color from "../../constants/Colors";
 
 import { useSelector, useDispatch } from "react-redux";
-import { AddToCart, RemoveFromCart } from "../../store/actions/BuyShopActions";
+import { AddToCart, RemoveFromCart } from "../../store/actions/BuyCartActions";
 const height = Dimens.height / 1.75 / 8;
 
 const ProductBuyCardComponent = ({
@@ -33,7 +33,7 @@ const ProductBuyCardComponent = ({
   const [inCart, setInCart] = useState(false);
   const dispatch = useDispatch();
   const index = useSelector((state) =>
-    state.BuyShop.cartProducts.findIndex((prod) => prod.productId === productId)
+    state.BuyCart.cartProducts.findIndex((prod) => prod.productId === productId)
   );
 
   useEffect(() => {

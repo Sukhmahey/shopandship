@@ -15,7 +15,7 @@ import Color from "../../constants/Colors";
 
 const BuyCart = ({ navigation }) => {
   const [payableAmount, setPayableAmount] = useState(0);
-  const allProducts = useSelector((state) => state.BuyShop.cartProducts);
+  const allProducts = useSelector((state) => state.BuyCart.cartProducts);
   console.log("Cart Prods", allProducts);
 
   useEffect(() => {
