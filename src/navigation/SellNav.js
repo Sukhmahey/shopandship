@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import ShopNav from "./ShopNav";
+
 import SellShopListScreen from "../screens/sell/SellShopListScreen";
 
 import Color from "../constants/Colors";

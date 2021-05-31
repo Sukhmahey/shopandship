@@ -19,7 +19,7 @@ import { Entypo } from "@expo/vector-icons";
 
 import { useSelector, useDispatch } from "react-redux";
 
-const BuyOrdersComponent = ({
+const SellOrdersComponent = ({
   photo,
   unit,
   name,
@@ -60,6 +60,7 @@ const BuyOrdersComponent = ({
             </Text>
             <Text style={styles.text}>Description: {desc}</Text>
             <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
+            <OkButtonComponent text="Accept" />
           </View>
         </View>
       </CardView>
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     width: "100%",
-    height: Dimens.height / 5,
+    height: Dimens.height / 3.5,
     borderColor: "orange",
     borderWidth: 3,
     borderRadius: 6,
@@ -120,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BuyOrdersComponent;
+export default SellOrdersComponent;

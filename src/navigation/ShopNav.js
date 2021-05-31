@@ -7,6 +7,7 @@ import EditShopScreen from "../screens/sell/EditShopScreen";
 import SellProductListScreen from "../screens/sell/SellProductListScreen";
 import CreateProductScreen from "../screens/sell/CreateProductScreen";
 import EditProductScreen from "../screens/sell/EditProductScreen";
+import OrdersNav from "./OrdersNav";
 
 import Color from "../constants/Colors";
 
@@ -31,6 +32,7 @@ const ShopNav = () => {
       />
       <shopStack.Screen name="CreateProduct" component={CreateProductScreen} />
       <shopStack.Screen name="EditProduct" component={EditProductScreen} />
+      <shopStack.Screen name="Orders" component={OrdersNav} />
     </shopStack.Navigator>
   );
 };

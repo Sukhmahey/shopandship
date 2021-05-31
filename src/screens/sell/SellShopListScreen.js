@@ -44,7 +44,7 @@ const SellShopListScreen = ({ navigation }) => {
               photo={item.shopPhoto}
               desc={item.shopDescription}
               nav={navigation}
-              id={item.shopId}
+              shopId={item.shopId}
             />
           );
         }}

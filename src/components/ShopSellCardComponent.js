@@ -22,7 +22,7 @@ const ShopSellCardComponent = ({
   phone,
   address,
   photo,
-  id,
+  shopId,
   desc,
   nav,
 }) => {
@@ -74,12 +74,17 @@ const ShopSellCardComponent = ({
           <OkButtonComponent
             text="Orders"
             style={{ width: "45%" }}
-            onPress={() => {}}
+            onPress={() => {
+              nav.navigate("Orders", {
+                screen: "Pending Orders",
+                params: { shopId: shopId },
+              });
+            }}
           />
           <OkButtonComponent
             text="Products"
             onPress={() => {
-              nav.navigate("SellProductList", { shopId: id });
+              nav.navigate("SellProductList", { shopId: shopId });
             }}
             style={{
               width: "45%",

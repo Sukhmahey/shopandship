@@ -11,6 +11,7 @@ import ProductReducer from "./src/store/reducers/ProductReducer";
 import BuyShopReducer from "./src/store/reducers/BuyShopReducer";
 import BuyCartReducer from "./src/store/reducers/BuyCartReducer";
 import BuyPOrdersReducer from "./src/store/reducers/BuyPOrdersReducer";
+import SellOrdersReducer from "./src/store/reducers/SellOrdersReducer";
 
 const rootReducer = combineReducers({
   Auth: AuthReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   BuyShop: BuyShopReducer,
   BuyCart: BuyCartReducer,
   BuyPOrders: BuyPOrdersReducer,
+  SellOrders: SellOrdersReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
