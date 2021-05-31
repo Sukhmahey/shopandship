@@ -27,7 +27,11 @@ const sellPendingOrders = () => {
 
 const sellAcceptedOrders = () => {
   return (
-    <buyStack.Navigator>
+    <buyStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <buyStack.Screen
         name="SellAcceptedOrders"
         component={SellAcceptedOrders}
@@ -38,7 +42,11 @@ const sellAcceptedOrders = () => {
 
 const sellDeliveredOrders = () => {
   return (
-    <buyStack.Navigator>
+    <buyStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <buyStack.Screen
         name="SellDeliveredOrders"
         component={SellDeliveredOrders}
@@ -50,8 +58,7 @@ const OrdersNav = () => {
   return (
     <toptab.Navigator
       screenOptions={{
-        headerShown: true,
-        headerTintColor: Color.PRIMARY_COLOR,
+        headerShown: false,
       }}
     >
       <toptab.Screen name="Pending Orders" component={sellPendingOrders} />

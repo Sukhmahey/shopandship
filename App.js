@@ -11,6 +11,7 @@ import ProductReducer from "./src/store/reducers/ProductReducer";
 import BuyShopReducer from "./src/store/reducers/BuyShopReducer";
 import BuyCartReducer from "./src/store/reducers/BuyCartReducer";
 import BuyPOrdersReducer from "./src/store/reducers/BuyPOrdersReducer";
+import BuyAOrdersReducer from "./src/store/reducers/BuyAOrdersReducer";
 import SellOrdersReducer from "./src/store/reducers/SellOrdersReducer";
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   BuyShop: BuyShopReducer,
   BuyCart: BuyCartReducer,
   BuyPOrders: BuyPOrdersReducer,
+  BuyAOrders: BuyAOrdersReducer,
   SellOrders: SellOrdersReducer,
 });
 

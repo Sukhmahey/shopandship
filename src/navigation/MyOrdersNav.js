@@ -27,7 +27,11 @@ const buyPendingOrders = () => {
 
 const buyAcceptedOrders = () => {
   return (
-    <buyStack.Navigator>
+    <buyStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <buyStack.Screen name="BuyAcceptedOrders" component={BuyAcceptedOrders} />
     </buyStack.Navigator>
   );
@@ -35,7 +39,11 @@ const buyAcceptedOrders = () => {
 
 const buyDeliveredOrders = () => {
   return (
-    <buyStack.Navigator>
+    <buyStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <buyStack.Screen
         name="BuyDeliveredOrders"
         component={BuyDeliveredOrders}

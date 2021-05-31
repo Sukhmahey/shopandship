@@ -2,6 +2,7 @@ import firestore from "@react-native-firebase/firestore";
 import { getAsyncData } from "../../api/AsyncData";
 
 export const Get_P_ORDERS = "get_p_orders";
+export const Get_A_ORDERS = "get_a_orders";
 export const REMOVE_FROM_BUY_PORDERS = "remove_p_orders";
 
 export const AddToBuyersPOrders = () => {
