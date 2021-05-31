@@ -15,6 +15,9 @@ import CardView from "react-native-cardview";
 import Dimens from "../constants/Dimens";
 import Color from "../constants/Colors";
 
+import { useSelector, useDispatch } from "react-redux";
+import { GetMyShopId } from "../store/actions/MyShopIdActions";
+
 const height = Dimens.height / 1.75 / 8;
 
 const ShopSellCardComponent = ({
@@ -26,8 +29,20 @@ const ShopSellCardComponent = ({
   desc,
   nav,
 }) => {
+  const dispatch = useDispatch();
   const TouchComponent =
     Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
+
+  const orders = () => {
+    dispatch(GetMyShopId(shopId));
+    nav.navigate("Orders", {
+      screen: "Pending Orders",
+      params: {
+        screen: "SellPendingOrders",
+        params: { shopId: shopId },
+      },
+    });
+  };
   return (
     <View style={styles.screen}>
       <CardView
@@ -75,13 +90,7 @@ const ShopSellCardComponent = ({
             text="Orders"
             style={{ width: "45%" }}
             onPress={() => {
-              nav.navigate("Orders", {
-                screen: "Pending Orders",
-                params: {
-                  screen: "SellPendingOrders",
-                  params: { shopId: shopId },
-                },
-              });
+              orders();
             }}
           />
           <OkButtonComponent

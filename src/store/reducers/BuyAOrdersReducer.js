@@ -1,7 +1,7 @@
 import {
   Get_P_ORDERS,
   Get_A_ORDERS,
-  REMOVE_FROM_BUY_PORDERS,
+  REMOVE_FROM_BUY_AORDERS,
 } from "../actions/BuyAOrdersActions";
 
 const initialState = {
@@ -19,6 +19,15 @@ const BuyAOrdersReducer = (state = initialState, actions) => {
         const AObj = [...state.acceptedOrders];
         AObj.push(actions.payload);
         return { ...state, acceptedOrders: AObj };
+      }
+    case REMOVE_FROM_BUY_AORDERS:
+      const removeProdIndex = state.acceptedOrders.findIndex(
+        (prod) => prod.productId === actions.productId
+      );
+      if (removeProdIndex >= 0) {
+        const removedCart = [...state.acceptedOrders];
+        removedCart.splice(removeProdIndex, 1);
+        return { ...state, acceptedOrders: removedCart };
       }
 
     default:

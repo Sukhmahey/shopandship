@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 
+import Color from "../../constants/Colors";
+
 import { useSelector, useDispatch } from "react-redux";
 
 const SellDeliveredOrders = ({ navigation }) => {
