@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { StackActions } from "@react-navigation/native";
+import { getAsyncData } from "../api/AsyncData";
 
 import AnimatedSplash from "react-native-animated-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -10,12 +11,11 @@ import { SignIn, CurrentUser } from "../store/actions/AuthActions";
 import { useSelector, useDispatch } from "react-redux";
 
 const SplashScreen = ({ navigation }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
+
   const isSignedIn = async () => {
     const isSignedIn = await GoogleSignin.isSignedIn();
-    console.log("Splash Screen", isSignedIn);
-    setIsLoaded(true);
+
     if (isSignedIn) {
       dispatch(CurrentUser());
     } else {

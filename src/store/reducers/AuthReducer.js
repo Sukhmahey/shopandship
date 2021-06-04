@@ -14,10 +14,10 @@ const AuthReducer = (state = initialState, actions) => {
       return {
         ...state,
         isSignedIn: true,
-        name: obj.name,
-        email: obj.email,
-        phone: obj.phone,
-        photo: obj.photo,
+        // name: obj.name,
+        // email: obj.email,
+        // phone: obj.phone,
+        // photo: obj.photo,
       };
     case SIGNOUT:
       return initialState;

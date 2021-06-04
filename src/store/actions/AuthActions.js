@@ -69,25 +69,26 @@ const onGoogleButtonPress = async (dispatch) => {
 };
 
 const getCurrentUser = async (dispatch) => {
-  const currentUser = await GoogleSignin.getCurrentUser().then((data) => {
-    console.log("Current User", auth().currentUser.uid);
-    const uid = auth().currentUser.uid;
-    const payload = {
-      uid: uid,
-      name: data.user.displayName,
-      email: data.user.email,
-      phone:
-        data.user.phoneNumber === null
-          ? "Not Available"
-          : data.user.phoneNumber,
-      photo: data.user.photoURL,
-    };
-    authAsyncStorage(payload);
+  // const currentUser = await GoogleSignin.getCurrentUser().then((data) => {
+  // const uid = auth().currentUser.uid;
+  // const payload = {
+  //   uid: uid,
+  //   name: data.user.displayName,
+  //   email: data.user.email,
+  //   phone:
+  //     data.user.phoneNumber === null
+  //       ? "Not Available"
+  //       : data.user.phoneNumber,
+  //   photo: data.user.photoURL,
+  // };
+  // authAsyncStorage(payload);
+
+  const data = getAsyncData();
+  if (data !== null) {
     dispatch({
       type: SIGNIN,
-      payload: payload,
     });
-  });
+  }
 };
 
 export const SignIn = () => {

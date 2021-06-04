@@ -25,7 +25,7 @@ const SellPendingOrders = ({ navigation, route }) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: "Cart",
+      headerTitle: "Pending Orders",
       headerShown: true,
       headerTintColor: Color.PRIMARY_COLOR,
     });
