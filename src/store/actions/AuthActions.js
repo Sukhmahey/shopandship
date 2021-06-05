@@ -13,6 +13,7 @@ export const GET_CURRENT_USER = "currentUser";
 export const ASYNC_AUTH_DATA = "auth_data";
 
 export const authAsyncStorage = async (payload) => {
+  console.log("Auth Sync");
   try {
     const jsonValue = await AsyncStorage.getItem(ASYNC_AUTH_DATA);
     if (jsonValue === null) {
@@ -27,6 +28,18 @@ export const authAsyncStorage = async (payload) => {
     console.log("Async Error (AuthActions) ", e);
   }
 };
+export const authAsyncStorageUpdate = async (payload) => {
+  console.log("Auth Sync");
+  try {
+    // const jsonValue = await AsyncStorage.getItem(ASYNC_AUTH_DATA);
+
+    const value = JSON.stringify(payload);
+    await AsyncStorage.setItem(ASYNC_AUTH_DATA, value);
+    return value;
+  } catch (e) {
+    console.log("Async Error (AuthActions) ", e);
+  }
+};
 
 const onGoogleButtonPress = async (dispatch) => {
   // Get the users ID token
@@ -37,35 +50,116 @@ const onGoogleButtonPress = async (dispatch) => {
   const data = auth()
     .signInWithCredential(googleCredential)
     .then((data) => {
-      const uid = auth().currentUser.uid;
-      firestore()
-        .collection("users")
-        .doc(uid)
-        .set({
-          name: data.user.displayName,
-          email: data.user.email,
-          phone:
-            data.user.phoneNumber === null
-              ? "Not Available"
-              : data.user.phoneNumber,
-          photo: data.user.photoURL,
-        });
-      const payload = {
-        uid: uid,
+      dispatch(GetUserDataFromFirebase(data));
+    });
+};
+
+export const UploadUserData = (dispatch, phoneNumber, address, data) => {
+  return async (dispatch) => {
+    const uid = auth().currentUser.uid;
+    const payload = {
+      uid: uid,
+      name: data.user.displayName,
+      email: data.user.email,
+      phone: phoneNumber,
+      address: address,
+      photo: data.user.photoURL,
+    };
+    firestore()
+      .collection("users")
+      .doc(uid)
+      .set({
         name: data.user.displayName,
         email: data.user.email,
-        phone:
-          data.user.phoneNumber === null
-            ? "Not Available"
-            : data.user.phoneNumber,
+        phone: phoneNumber,
+        address: address,
         photo: data.user.photoURL,
-      };
-      authAsyncStorage(payload);
-      dispatch({
-        type: SIGNIN,
-        payload: payload,
-      });
+      })
+      .then(() => {});
+
+    authAsyncStorage(payload);
+
+    dispatch({
+      type: SIGNIN,
+      payload: payload,
     });
+  };
+};
+
+const GetUserDataFromFirebase = (userData) => {
+  return async (dispatch) => {
+    const uid = auth().currentUser.uid;
+    if (uid !== null) {
+      firestore()
+        .collection("users")
+        .doc(`${uid}`)
+        .get()
+        .then((data) => {
+          console.log("userdata", data._data);
+          if (data._data === undefined) {
+            dispatch(
+              UploadUserData(
+                dispatch,
+                "Not Available",
+                "Not Available",
+                userData
+              )
+            );
+          } else if (
+            (data._data.phoneNumber === "Not Available" ||
+              data._data.phoneNumber === undefined) &&
+            (data._data.address === "Not Available" ||
+              data._data.address === undefined)
+          ) {
+            dispatch(
+              UploadUserData(
+                dispatch,
+                "Not Available",
+                "Not Available",
+                userData
+              )
+            );
+          } else if (
+            (data._data.phoneNumber === "Not Available" ||
+              data._data.phoneNumber === undefined) &&
+            (data._data.address !== "Not Available" ||
+              data._data.phoneNumber !== undefined)
+          ) {
+            dispatch(
+              UploadUserData(
+                dispatch,
+                "Not Available",
+                data._data.address,
+                userData
+              )
+            );
+          } else if (
+            (data._data.phoneNumber !== "Not Available" ||
+              data._data.phoneNumber !== undefined) &&
+            (data._data.address === "Not Available" ||
+              data._data.phoneNumber === undefined)
+          ) {
+            dispatch(
+              UploadUserData(
+                dispatch,
+                data._data.phoneNumber,
+                "Not Available",
+                userData
+              )
+            );
+          } else {
+            dispatch(
+              UploadUserData(
+                dispatch,
+                data._data.phoneNumber,
+                data._data.address,
+                userData
+              )
+            );
+          }
+        });
+    }
+  };
 };
 
 const getCurrentUser = async (dispatch) => {

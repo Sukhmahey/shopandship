@@ -212,7 +212,21 @@ const EditShopScreen = ({ navigation, route }) => {
                   maxLength={10}
                   minLength={10}
                   onChangeText={(val) => {
-                    setProductData({ ...productData, productPrice: val });
+                    let num = val.replace(".", "");
+                    if (isNaN(num)) {
+                      Alert.alert(
+                        "Invalid Input",
+                        "Phone number only contain numbers",
+                        [
+                          {
+                            text: "OK",
+                            onPress: () => console.log("OK Pressed"),
+                          },
+                        ]
+                      );
+                    } else {
+                      setProductData({ ...productData, productPrice: val });
+                    }
                   }}
                   iconLeft={
                     <FontAwesome

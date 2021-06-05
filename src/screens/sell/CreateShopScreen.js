@@ -187,7 +187,21 @@ const CreateShopScreen = ({ navigation }) => {
                   maxLength={10}
                   minLength={10}
                   onChangeText={(val) => {
-                    setShopData({ ...shopData, shopPhone: val });
+                    let num = val.replace(".", "");
+                    if (isNaN(num)) {
+                      Alert.alert(
+                        "Invalid Input",
+                        "Phone number only contain numbers",
+                        [
+                          {
+                            text: "OK",
+                            onPress: () => console.log("OK Pressed"),
+                          },
+                        ]
+                      );
+                    } else {
+                      setShopData({ ...shopData, shopPhone: val });
+                    }
                   }}
                   iconLeft={
                     <Entypo

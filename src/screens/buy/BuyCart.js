@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, Alert } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
 import ProductBuyCardComponent from "../../components/products/ProductBuyCardComponent";
@@ -9,6 +9,7 @@ import OkButtonComponent from "../../components/OkButtonComponent";
 import BuyCartComponent from "../../components/cart/BuyCartComponent";
 import LoadingScreenComponent from "../../components/LoadingScreenComponent";
 
+import { getAsyncData } from "../../api/AsyncData";
 import { useSelector, useDispatch } from "react-redux";
 import {
   ClearCart,
@@ -33,10 +34,31 @@ const BuyCart = ({ navigation }) => {
     setPayableAmount(amount);
   }, [allProducts]);
 
-  const Checkout = () => {
-    dispatch(AddToBuyersPOrders());
-    dispatch(ClearCart());
-    dispatch(EmptyFirebaseCart());
+  const Checkout = async () => {
+    const data = await getAsyncData();
+    if (
+      data.address === "Not Available" ||
+      data.address === undefined ||
+      data.phone === "Not available" ||
+      data.phone === undefined
+    ) {
+      Alert.alert(
+        "Empty Phone Number or Adrress",
+        "Add phone number and address in accounts tab",
+        [
+          {
+            text: "OK",
+            onPress: () => {
+              navigation.navigate("Account");
+            },
+          },
+        ]
+      );
+    } else {
+      dispatch(AddToBuyersPOrders());
+      dispatch(ClearCart());
+      dispatch(EmptyFirebaseCart());
+    }
   };
 
   React.useLayoutEffect(() => {

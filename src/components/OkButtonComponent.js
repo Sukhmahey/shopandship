@@ -5,7 +5,10 @@ import Color from "../constants/Colors";
 const OkButtonComponent = (props) => {
   return (
     <TouchableOpacity {...props} style={[styles.button, props.style]}>
-      <Text style={styles.text}>{props.text}</Text>
+      <View style={{ flexDirection: "row" }}>
+        <Text style={styles.text}>{props.text}</Text>
+        <View>{props.icon}</View>
+      </View>
     </TouchableOpacity>
   );
 };
