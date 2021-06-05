@@ -29,6 +29,8 @@ const ProductBuyCardComponent = ({
   nav,
   shopId,
   shopUid,
+  phone,
+  address,
 }) => {
   const [inCart, setInCart] = useState(false);
   const dispatch = useDispatch();
@@ -69,6 +71,8 @@ const ProductBuyCardComponent = ({
             <Text style={styles.text}>
               Price: {price} / {unit}
             </Text>
+            <Text style={styles.text}>Shop Phone No.: {phone}</Text>
+            <Text style={styles.text}>Shop Address: {address}</Text>
             <View>
               {inCart ? (
                 <OkButtonComponent
@@ -142,7 +146,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     width: "100%",
-    height: Dimens.height / 1.75,
+    height: Dimens.height / 1.4,
 
     borderRadius: 6,
     padding: 5,

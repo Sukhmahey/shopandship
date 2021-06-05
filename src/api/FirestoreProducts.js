@@ -8,8 +8,11 @@ export const AddProduct = async (
   shopId,
   productId,
   productData,
-  navigation
+  navigation,
+  address,
+  phone
 ) => {
+  console.log("Add prod", address, phone);
   const data = await getAsyncData();
   const uid = data.uid;
   const res = firestore()
@@ -27,6 +30,8 @@ export const AddProduct = async (
       productPrice: productData.productPrice,
       productUnit: productData.productUnit,
       productDescription: productData.productDescription,
+      phone: phone,
+      address: address,
     })
     .then(() => {
       console.log("product added!");

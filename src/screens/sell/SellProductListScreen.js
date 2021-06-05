@@ -8,7 +8,7 @@ import { GetAllProducts } from "../../store/actions/ProductActions";
 import { useSelector, useDispatch } from "react-redux";
 
 const SellProductListScreen = ({ navigation, route }) => {
-  const { shopId } = route.params;
+  const { shopId, address, phone } = route.params;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetAllProducts(shopId));
@@ -23,7 +23,11 @@ const SellProductListScreen = ({ navigation, route }) => {
       headerRight: () => (
         <PlusIconComponent
           onPress={() => {
-            navigation.navigate("CreateProduct", { shopId: shopId });
+            navigation.navigate("CreateProduct", {
+              shopId: shopId,
+              address: address,
+              phone: phone,
+            });
           }}
         />
       ),

@@ -44,14 +44,17 @@ const CreateProductScreen = ({ navigation, route }) => {
     productId: "",
     productDescription: "",
   });
-  const { shopId } = route.params;
+  const { shopId, address, phone } = route.params;
 
   useEffect(() => {
-    setProductData({
-      ...productData,
-      shopId: shopId,
+    const unsubscribe = navigation.addListener("focus", () => {
+      setProductData({ ...productData, shopId: shopId });
+      console.log(shopId, address, phone);
     });
-  }, [navigation]);
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation, shopId]);
 
   useEffect(() => {
     getAsyncData().then((data) => {
@@ -64,7 +67,9 @@ const CreateProductScreen = ({ navigation, route }) => {
         productData.shopId,
         productData.productId,
         productData,
-        navigation
+        navigation,
+        address,
+        phone
       );
     }
   }, [productData.productPhoto]);

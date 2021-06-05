@@ -96,7 +96,12 @@ const ShopSellCardComponent = ({
           <OkButtonComponent
             text="Products"
             onPress={() => {
-              nav.navigate("SellProductList", { shopId: shopId });
+              nav.navigate("SellProductList", {
+                shopId: shopId,
+                address: address,
+                phone,
+                phone,
+              });
             }}
             style={{
               width: "45%",
