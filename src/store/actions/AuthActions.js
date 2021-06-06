@@ -50,6 +50,7 @@ const onGoogleButtonPress = async (dispatch) => {
   const data = auth()
     .signInWithCredential(googleCredential)
     .then((data) => {
+      console.log("User Data", data);
       dispatch(GetUserDataFromFirebase(data));
     });
 };
@@ -107,7 +108,8 @@ const GetUserDataFromFirebase = (userData) => {
             );
           } else if (
             (data._data.phoneNumber === "Not Available" ||
-              data._data.phoneNumber === undefined) &&
+              data._data.phoneNumber === undefined ||
+              data._data.phoneNumber === null) &&
             (data._data.address === "Not Available" ||
               data._data.address === undefined)
           ) {
@@ -121,9 +123,10 @@ const GetUserDataFromFirebase = (userData) => {
             );
           } else if (
             (data._data.phoneNumber === "Not Available" ||
-              data._data.phoneNumber === undefined) &&
+              data._data.phoneNumber === undefined ||
+              data._data.phoneNumber === null) &&
             (data._data.address !== "Not Available" ||
-              data._data.phoneNumber !== undefined)
+              data._data.address !== undefined)
           ) {
             dispatch(
               UploadUserData(
@@ -135,7 +138,8 @@ const GetUserDataFromFirebase = (userData) => {
             );
           } else if (
             (data._data.phoneNumber !== "Not Available" ||
-              data._data.phoneNumber !== undefined) &&
+              data._data.phoneNumber !== undefined ||
+              data._data.phoneNumber !== null) &&
             (data._data.address === "Not Available" ||
               data._data.phoneNumber === undefined)
           ) {
