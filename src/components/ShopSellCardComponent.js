@@ -98,9 +98,9 @@ const ShopSellCardComponent = ({
             onPress={() => {
               nav.navigate("SellProductList", {
                 shopId: shopId,
+                name: name,
                 address: address,
-                phone,
-                phone,
+                phone: phone,
               });
             }}
             style={{

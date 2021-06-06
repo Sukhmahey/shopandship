@@ -113,6 +113,7 @@ const GetUserDataFromFirebase = (userData) => {
             (data._data.address === "Not Available" ||
               data._data.address === undefined)
           ) {
+            console.log("phone no data no");
             dispatch(
               UploadUserData(
                 dispatch,
@@ -128,6 +129,7 @@ const GetUserDataFromFirebase = (userData) => {
             (data._data.address !== "Not Available" ||
               data._data.address !== undefined)
           ) {
+            console.log("phone no data yes");
             dispatch(
               UploadUserData(
                 dispatch,
@@ -143,6 +145,7 @@ const GetUserDataFromFirebase = (userData) => {
             (data._data.address === "Not Available" ||
               data._data.phoneNumber === undefined)
           ) {
+            console.log("phone yes data no");
             dispatch(
               UploadUserData(
                 dispatch,
@@ -152,6 +155,7 @@ const GetUserDataFromFirebase = (userData) => {
               )
             );
           } else {
+            console.log("phone no data no else");
             dispatch(
               UploadUserData(
                 dispatch,

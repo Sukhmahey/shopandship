@@ -69,16 +69,15 @@ const SellOrdersComponent = ({
             </CardView>
           </View>
           <View style={styles.textContainer}>
-            <View style={{ flex: 3 }}>
+            <View style={{ flex: 2 }}>
               <Text style={styles.titleText}>{name}</Text>
               <Text style={styles.text}>
                 Price : {price}/{unit}
               </Text>
               <Text style={styles.text}>Units purchased: {counter}</Text>
-
-              <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
             </View>
-            <View style={{ flex: 2.5 }}>
+            <View style={{ flex: 3 }}>
+              <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
               <Text style={styles.text}>Buyers phone no. : {buyersPhone}</Text>
               <Text style={styles.text}>Buyers Address : {buyersAddress}</Text>
             </View>
@@ -117,7 +116,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     width: "100%",
-    height: Dimens.height / 2.5,
+    height: Dimens.height / 2.3,
     borderColor: "green",
     borderWidth: 3,
     borderRadius: 6,

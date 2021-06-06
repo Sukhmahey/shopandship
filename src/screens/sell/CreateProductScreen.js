@@ -44,7 +44,7 @@ const CreateProductScreen = ({ navigation, route }) => {
     productId: "",
     productDescription: "",
   });
-  const { shopId, address, phone } = route.params;
+  const { shopId, name, address, phone } = route.params;
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -68,6 +68,7 @@ const CreateProductScreen = ({ navigation, route }) => {
         productData.productId,
         productData,
         navigation,
+        name,
         address,
         phone
       );

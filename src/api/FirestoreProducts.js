@@ -9,6 +9,7 @@ export const AddProduct = async (
   productId,
   productData,
   navigation,
+  name,
   address,
   phone
 ) => {
@@ -30,8 +31,9 @@ export const AddProduct = async (
       productPrice: productData.productPrice,
       productUnit: productData.productUnit,
       productDescription: productData.productDescription,
-      phone: phone,
-      address: address,
+      shopName: name,
+      shopPhone: phone,
+      shopAddress: address,
     })
     .then(() => {
       console.log("product added!");

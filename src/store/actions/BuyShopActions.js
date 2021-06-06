@@ -26,8 +26,9 @@ const getAllShops = async (dispatch, uid) => {
             productPhoto: element._data.productPhoto,
             productPrice: element._data.productPrice,
             productUnit: element._data.productUnit,
-            phone: element._data.phone,
-            address: element._data.address,
+            shopName: element._data.shopName,
+            shopPhone: element._data.shopPhone,
+            shopAddress: element._data.shopAddress,
             shopId: element._data.shopId,
             uid: uid,
           };

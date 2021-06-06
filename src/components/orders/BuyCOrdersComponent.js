@@ -30,6 +30,9 @@ const BuyCOrdersComponent = ({
   shopUid,
   amount,
   color,
+  shopName,
+  shopPhone,
+  shopAddress,
 }) => {
   const [counter, setCounter] = useState(amount / price);
   const dispatch = useDispatch();
@@ -44,9 +47,19 @@ const BuyCOrdersComponent = ({
       >
         <View style={styles.viewsContainer}>
           <View style={styles.imageContainer}>
-            <CardView cardElevation={6} cardMaxElevation={6} cornerRadius={6}>
+            <CardView
+              cardElevation={6}
+              cardMaxElevation={6}
+              cornerRadius={6}
+              style={{
+                padding: 1,
+                borderWidth: 3,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <Image
-                style={{ resizeMode: "center", height: "100%", width: "100%" }}
+                style={{ resizeMode: "contain", height: "100%", width: "100%" }}
                 source={{
                   uri: photo,
                 }}
@@ -54,12 +67,20 @@ const BuyCOrdersComponent = ({
             </CardView>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.titleText}>{name}</Text>
-            <Text style={styles.text}>
-              Price : {price}/{unit}
-            </Text>
-            <Text style={styles.text}>Description: {desc}</Text>
-            <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
+            <View style={{ flex: 2 }}>
+              <Text style={styles.titleText}>{name}</Text>
+              <Text style={styles.text}>
+                Price : {price}/{unit}
+              </Text>
+              <Text style={styles.text}>Units purchased: {counter}</Text>
+            </View>
+            <View style={{ flex: 3 }}>
+              <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
+
+              <Text style={styles.text}>Shop name : {shopName}</Text>
+              <Text style={styles.text}>Shop phone no. : {shopPhone}</Text>
+              <Text style={styles.text}>Shop Address : {shopAddress}</Text>
+            </View>
           </View>
         </View>
       </CardView>
@@ -88,7 +109,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     width: "100%",
-    height: Dimens.height / 5,
+    height: Dimens.height / 2.2,
     borderColor: "red",
     borderWidth: 3,
     borderRadius: 6,
@@ -108,10 +129,11 @@ const styles = StyleSheet.create({
     marginVertical: 1,
   },
   titleText: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "bold",
     color: "black",
     flex: 1,
+    marginBottom: 5,
   },
   text: {
     fontSize: 16,

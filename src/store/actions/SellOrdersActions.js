@@ -107,6 +107,10 @@ export const AddToSellCancelledOrders = (shopId, productId, buyUid) => {
         .doc(productId)
         .get()
         .then((data) => {
+          dispatch({
+            type: REMOVE_FROM_SELL_PORDERS,
+            productId: productId,
+          });
           const obj = data._data;
           firestore()
             .collection("users")
@@ -136,10 +140,6 @@ export const AddToSellCancelledOrders = (shopId, productId, buyUid) => {
                     .doc(productId)
                     .delete()
                     .then(() => {
-                      dispatch({
-                        type: REMOVE_FROM_SELL_PORDERS,
-                        productId: productId,
-                      });
                       console.log("Removed From Pending Order");
                     })
                     .catch((e) => {

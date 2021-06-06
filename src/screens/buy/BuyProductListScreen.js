@@ -118,8 +118,9 @@ const BuyProductListScreen = ({ navigation }) => {
               productId={item.productId}
               shopId={item.shopId}
               shopUid={item.uid}
-              phone={item.phone}
-              address={item.address}
+              shopName={item.shopName}
+              shopPhone={item.shopPhone}
+              shopAddress={item.shopAddress}
             />
           );
         }}
@@ -131,7 +132,7 @@ const BuyProductListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    margin: 10,
+    margin: 5,
   },
   searchBarContainer: {
     backgroundColor: "white",

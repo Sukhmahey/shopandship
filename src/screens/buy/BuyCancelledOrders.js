@@ -44,6 +44,9 @@ const BuyCancelledOrders = ({ navigation }) => {
                 shopId={item.shopId}
                 shopUid={item.uid}
                 amount={item.amount}
+                shopName={item.shopName}
+                shopPhone={item.shopPhone}
+                shopAddress={item.shopAddress}
               />
             );
           }}

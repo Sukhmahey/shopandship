@@ -57,6 +57,9 @@ const AddToSellersPOrders = (element) => {
           amount: element._data.amount,
           buyersPhone: data.phone,
           buyersAddress: data.address,
+          shopName: element._data.shopName,
+          shopPhone: element._data.shopPhone,
+          shopAddress: element._data.shopAddress,
         })
 
         .then(() => {
@@ -76,6 +79,9 @@ const AddToSellersPOrders = (element) => {
               productPrice: element._data.productPrice,
               productUnit: element._data.productUnit,
               amount: element._data.amount,
+              shopName: element._data.shopName,
+              shopPhone: element._data.shopPhone,
+              shopAddress: element._data.shopAddress,
             })
             .then(() => {
               firestore()

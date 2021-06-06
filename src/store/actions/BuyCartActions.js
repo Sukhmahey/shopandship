@@ -44,7 +44,10 @@ export const AddToCart = (
   productId,
   shopId,
   shopUid,
-  desc
+  desc,
+  shopName,
+  shopPhone,
+  shopAddress
 ) => {
   return async (dispatch) => {
     const data = await getAsyncData();
@@ -65,6 +68,9 @@ export const AddToCart = (
           productUnit: unit,
           productDescription: desc,
           amount: price,
+          shopName: shopName,
+          shopPhone: shopPhone,
+          shopAddress: shopAddress,
         })
         .then(() => {
           console.log("Added To Cart");
@@ -92,7 +98,7 @@ export const RemoveFromCart = (productId) => {
             type: REMOVE_FROM_CART,
             productId: productId,
           });
-          console.log("Removed From Cart");
+          console.log("Removed From Cart here");
         })
         .catch((e) => {
           console.log("error removing from cart", e);
@@ -147,10 +153,10 @@ export const EmptyFirebaseCart = () => {
   };
 };
 
-export const ClearCart = () => {
-  return async (dispatch) => {
-    dispatch({
-      type: CLEAR_CART,
-    });
-  };
-};
+// export const ClearCart = () => {
+//   return async (dispatch) => {
+//     dispatch({
+//       type: CLEAR_CART,
+//     });
+//   };
+// };

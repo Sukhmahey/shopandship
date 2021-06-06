@@ -8,7 +8,7 @@ import { GetAllProducts } from "../../store/actions/ProductActions";
 import { useSelector, useDispatch } from "react-redux";
 
 const SellProductListScreen = ({ navigation, route }) => {
-  const { shopId, address, phone } = route.params;
+  const { shopId, name, address, phone } = route.params;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetAllProducts(shopId));
@@ -25,6 +25,7 @@ const SellProductListScreen = ({ navigation, route }) => {
           onPress={() => {
             navigation.navigate("CreateProduct", {
               shopId: shopId,
+              name: name,
               address: address,
               phone: phone,
             });
