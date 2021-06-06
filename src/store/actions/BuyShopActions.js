@@ -12,6 +12,9 @@ export const UPDATE_TOTAL_CART_PRICE = "update_total_cart_price";
 export const CLEAR_SHOPS = "clear_shops";
 
 const getAllShops = async (dispatch, uid) => {
+  dispatch({
+    type: CLEAR_SHOPS,
+  });
   const onResult = (QuerySnapshot) => {
     QuerySnapshot.forEach((element) => {
       const onResult = (QuerySnapshot) => {
@@ -68,9 +71,6 @@ export const BuyGetAllShops = () => {
 
     function onResult(QuerySnapshot) {
       QuerySnapshot.forEach((element) => {
-        dispatch({
-          type: CLEAR_SHOPS,
-        });
         getAllShops(dispatch, element.id);
       });
     }

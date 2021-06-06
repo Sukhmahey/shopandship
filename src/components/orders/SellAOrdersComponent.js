@@ -33,6 +33,8 @@ const SellOrdersComponent = ({
   amount,
   color,
   uid,
+  buyersPhone,
+  buyersAddress,
 }) => {
   const [counter, setCounter] = useState(amount / price);
   const dispatch = useDispatch();
@@ -52,7 +54,12 @@ const SellOrdersComponent = ({
       >
         <View style={styles.viewsContainer}>
           <View style={styles.imageContainer}>
-            <CardView cardElevation={6} cardMaxElevation={6} cornerRadius={6}>
+            <CardView
+              cardElevation={6}
+              cardMaxElevation={6}
+              cornerRadius={6}
+              style={{ justifyContent: "center" }}
+            >
               <Image
                 style={{ resizeMode: "center", height: "100%", width: "100%" }}
                 source={{
@@ -62,17 +69,25 @@ const SellOrdersComponent = ({
             </CardView>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.titleText}>{name}</Text>
-            <Text style={styles.text}>
-              Price : {price}/{unit}
-            </Text>
-            <Text style={styles.text}>Description: {desc}</Text>
-            <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
+            <View style={{ flex: 3 }}>
+              <Text style={styles.titleText}>{name}</Text>
+              <Text style={styles.text}>
+                Price : {price}/{unit}
+              </Text>
+              <Text style={styles.text}>Units purchased: {counter}</Text>
+
+              <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
+            </View>
+            <View style={{ flex: 2.5 }}>
+              <Text style={styles.text}>Buyers phone no. : {buyersPhone}</Text>
+              <Text style={styles.text}>Buyers Address : {buyersAddress}</Text>
+            </View>
             <OkButtonComponent
               text="Delivered"
               onPress={() => {
                 Delivered();
               }}
+              style={{ backgroundColor: "green" }}
             />
           </View>
         </View>
@@ -102,7 +117,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     width: "100%",
-    height: Dimens.height / 3.5,
+    height: Dimens.height / 2.5,
     borderColor: "green",
     borderWidth: 3,
     borderRadius: 6,
@@ -122,10 +137,11 @@ const styles = StyleSheet.create({
     marginVertical: 1,
   },
   titleText: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "bold",
     color: "black",
     flex: 1,
+    marginBottom: 5,
   },
   text: {
     fontSize: 16,

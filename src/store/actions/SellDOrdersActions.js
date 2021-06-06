@@ -30,6 +30,8 @@ export const GetSellDOrdersFromFirebase = (shopId) => {
             shopId: element._data.obj.shopId,
             shopUid: element._data.obj.shopUid,
             uid: element._data.obj.uid,
+            buyersPhone: element._data.obj.buyersPhone,
+            buyersAddress: element._data.obj.buyersAddress,
           };
           dispatch({
             type: GET_SD_ORDERS,

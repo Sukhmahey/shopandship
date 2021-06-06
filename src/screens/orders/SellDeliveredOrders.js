@@ -58,6 +58,8 @@ const SellDeliveredOrders = ({ navigation }) => {
                 shopUid={item.uid}
                 amount={item.amount}
                 uid={item.uid}
+                buyersPhone={item.buyersPhone}
+                buyersAddress={item.buyersAddress}
               />
             );
           }}

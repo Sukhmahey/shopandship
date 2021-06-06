@@ -18,7 +18,7 @@ const SellShopListScreen = ({ navigation }) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: "Shop'N Ship",
+      headerTitle: "My Shops",
       headerShown: true,
       headerLeft: () => <DrawerIconComponent navigation={navigation} />,
       headerRight: () => (

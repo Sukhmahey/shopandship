@@ -33,6 +33,8 @@ const SellOrdersComponent = ({
   amount,
   color,
   uid,
+  buyersPhone,
+  buyersAddress,
 }) => {
   const [counter, setCounter] = useState(amount / price);
   const dispatch = useDispatch();
@@ -62,12 +64,19 @@ const SellOrdersComponent = ({
             </CardView>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.titleText}>{name}</Text>
-            <Text style={styles.text}>
-              Price : {price}/{unit}
-            </Text>
-            <Text style={styles.text}>Description: {desc}</Text>
-            <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
+            <View style={{ flex: 3 }}>
+              <Text style={styles.titleText}>{name}</Text>
+              <Text style={styles.text}>
+                Price : {price}/{unit}
+              </Text>
+              <Text style={styles.text}>Units purchased: {counter}</Text>
+
+              <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
+            </View>
+            <View style={{ flex: 2.5 }}>
+              <Text style={styles.text}>Buyers phone no. : {buyersPhone}</Text>
+              <Text style={styles.text}>Buyers Address : {buyersAddress}</Text>
+            </View>
           </View>
         </View>
       </CardView>

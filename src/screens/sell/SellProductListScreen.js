@@ -17,7 +17,7 @@ const SellProductListScreen = ({ navigation, route }) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: "Products",
+      headerTitle: "My Products",
       headerShown: true,
 
       headerRight: () => (

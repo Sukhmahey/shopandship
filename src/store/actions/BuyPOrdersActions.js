@@ -55,6 +55,8 @@ const AddToSellersPOrders = (element) => {
           productPrice: element._data.productPrice,
           productUnit: element._data.productUnit,
           amount: element._data.amount,
+          buyersPhone: data.phone,
+          buyersAddress: data.address,
         })
 
         .then(() => {
