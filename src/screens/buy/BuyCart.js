@@ -11,10 +11,7 @@ import LoadingScreenComponent from "../../components/LoadingScreenComponent";
 
 import { getAsyncData } from "../../api/AsyncData";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  ClearCart,
-  EmptyFirebaseCart,
-} from "../../store/actions/BuyCartActions";
+import { ClearCart } from "../../store/actions/BuyCartActions";
 import { AddToBuyersPOrders } from "../../store/actions/BuyPOrdersActions";
 
 import Color from "../../constants/Colors";
@@ -56,7 +53,7 @@ const BuyCart = ({ navigation }) => {
       );
     } else {
       dispatch(AddToBuyersPOrders());
-      //dispatch(ClearCart());
+      dispatch(ClearCart());
       // dispatch(EmptyFirebaseCart());
     }
   };

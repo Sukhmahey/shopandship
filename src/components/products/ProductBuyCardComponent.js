@@ -80,6 +80,7 @@ const ProductBuyCardComponent = ({
                 <OkButtonComponent
                   text="Remove from Cart"
                   onPress={() => {
+                    console.log("Add to cart pressed");
                     dispatch(RemoveFromCart(productId));
                   }}
                   style={{
@@ -91,6 +92,7 @@ const ProductBuyCardComponent = ({
                 <OkButtonComponent
                   text="Add to Cart"
                   onPress={() => {
+                    console.log("Add to cart pressed");
                     dispatch(
                       AddToCart(
                         name,

@@ -1,6 +1,5 @@
 import firestore from "@react-native-firebase/firestore";
 import { getAsyncData } from "../../api/AsyncData";
-import { REMOVE_FROM_CART } from "../actions/BuyCartActions";
 
 export const Get_P_ORDERS = "get_p_orders";
 export const Get_A_ORDERS = "get_a_orders";
@@ -90,13 +89,7 @@ const AddToSellersPOrders = (element) => {
                 .collection("cart")
                 .doc(element.id)
                 .delete()
-                .then(() => {
-                  dispatch({
-                    type: REMOVE_FROM_CART,
-                    productId: element.id,
-                  });
-                  console.log("Removed From Cart");
-                })
+                .then(() => {})
                 .catch((e) => {
                   console.log("error removing from cart", e);
                 });

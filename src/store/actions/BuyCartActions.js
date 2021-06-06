@@ -153,10 +153,10 @@ export const EmptyFirebaseCart = () => {
   };
 };
 
-// export const ClearCart = () => {
-//   return async (dispatch) => {
-//     dispatch({
-//       type: CLEAR_CART,
-//     });
-//   };
-// };
+export const ClearCart = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: CLEAR_CART,
+    });
+  };
+};

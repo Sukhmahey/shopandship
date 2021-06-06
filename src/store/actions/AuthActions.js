@@ -107,9 +107,9 @@ const GetUserDataFromFirebase = (userData) => {
               )
             );
           } else if (
-            (data._data.phoneNumber === "Not Available" ||
-              data._data.phoneNumber === undefined ||
-              data._data.phoneNumber === null) &&
+            (data._data.phone === "Not Available" ||
+              data._data.phone === undefined ||
+              data._data.phone === null) &&
             (data._data.address === "Not Available" ||
               data._data.address === undefined)
           ) {
@@ -123,9 +123,9 @@ const GetUserDataFromFirebase = (userData) => {
               )
             );
           } else if (
-            (data._data.phoneNumber === "Not Available" ||
-              data._data.phoneNumber === undefined ||
-              data._data.phoneNumber === null) &&
+            (data._data.phone === "Not Available" ||
+              data._data.phone === undefined ||
+              data._data.phone === null) &&
             (data._data.address !== "Not Available" ||
               data._data.address !== undefined)
           ) {
@@ -139,27 +139,27 @@ const GetUserDataFromFirebase = (userData) => {
               )
             );
           } else if (
-            (data._data.phoneNumber !== "Not Available" ||
-              data._data.phoneNumber !== undefined ||
-              data._data.phoneNumber !== null) &&
+            (data._data.phone !== "Not Available" ||
+              data._data.phone !== undefined ||
+              data._data.phone !== null) &&
             (data._data.address === "Not Available" ||
-              data._data.phoneNumber === undefined)
+              data._data.address === undefined)
           ) {
             console.log("phone yes data no");
             dispatch(
               UploadUserData(
                 dispatch,
-                data._data.phoneNumber,
+                data._data.phone,
                 "Not Available",
                 userData
               )
             );
           } else {
-            console.log("phone no data no else");
+            console.log("phone yes data yes else");
             dispatch(
               UploadUserData(
                 dispatch,
-                data._data.phoneNumber,
+                data._data.phone,
                 data._data.address,
                 userData
               )

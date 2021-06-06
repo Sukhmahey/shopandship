@@ -11,7 +11,7 @@ export const UpdatePhone = async (phoneNumber) => {
     .collection("users")
     .doc(`${uid}`)
     .update({
-      phoneNumber: phoneNumber,
+      phone: phoneNumber,
     })
     .then(() => {
       console.log("Phone Number Updated");
