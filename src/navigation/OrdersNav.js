@@ -7,6 +7,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import SellPendingOrders from "../screens/orders/SellPendingOrders";
 import SellAcceptedOrders from "../screens/orders/SellAcceptedOrders";
 import SellDeliveredOrders from "../screens/orders/SellDeliveredOrders";
+import SellCancelledOrders from "../screens/orders/SellCancelledOrders";
 
 import Color from "../constants/Colors";
 
@@ -54,6 +55,20 @@ const sellDeliveredOrders = () => {
     </buyStack.Navigator>
   );
 };
+const sellCancelledOrders = () => {
+  return (
+    <buyStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <buyStack.Screen
+        name="SellCancelledOrders"
+        component={SellCancelledOrders}
+      />
+    </buyStack.Navigator>
+  );
+};
 const OrdersNav = () => {
   return (
     <toptab.Navigator
@@ -64,6 +79,7 @@ const OrdersNav = () => {
       <toptab.Screen name="Pending Orders" component={sellPendingOrders} />
       <toptab.Screen name="Accepted Orders" component={sellAcceptedOrders} />
       <toptab.Screen name="Delivered Orders" component={sellDeliveredOrders} />
+      <toptab.Screen name="Cancelled Orders" component={sellCancelledOrders} />
     </toptab.Navigator>
   );
 };

@@ -18,13 +18,8 @@ import OkButtonComponent from "../OkButtonComponent";
 import { Entypo } from "@expo/vector-icons";
 
 import { useSelector, useDispatch } from "react-redux";
-import {
-  AddToSellAcceptedOrders,
-  AddToSellCancelledOrders,
-} from "../../store/actions/SellOrdersActions";
-import { RemoveFromBuyPOrders } from "../../store/actions/BuyPOrdersActions";
 
-const SellOrdersComponent = ({
+const SellCOrdersComponent = ({
   photo,
   unit,
   name,
@@ -42,16 +37,6 @@ const SellOrdersComponent = ({
   const [counter, setCounter] = useState(amount / price);
   const dispatch = useDispatch();
 
-  const Accept = () => {
-    dispatch(AddToSellAcceptedOrders(shopId, productId, uid));
-    dispatch(RemoveFromBuyPOrders(productId));
-  };
-
-  const Cancel = () => {
-    dispatch(AddToSellCancelledOrders(shopId, productId, uid));
-    dispatch(RemoveFromBuyPOrders(productId));
-  };
-
   return (
     <View style={styles.screen}>
       <CardView
@@ -62,17 +47,7 @@ const SellOrdersComponent = ({
       >
         <View style={styles.viewsContainer}>
           <View style={styles.imageContainer}>
-            <CardView
-              cardElevation={6}
-              cardMaxElevation={6}
-              cornerRadius={6}
-              style={{
-                padding: 1,
-                borderWidth: 3,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <CardView cardElevation={6} cardMaxElevation={6} cornerRadius={6}>
               <Image
                 style={{ resizeMode: "center", height: "100%", width: "100%" }}
                 source={{
@@ -94,24 +69,6 @@ const SellOrdersComponent = ({
             <View style={{ flex: 2.5 }}>
               <Text style={styles.text}>Buyers phone no. : {buyersPhone}</Text>
               <Text style={styles.text}>Buyers Address : {buyersAddress}</Text>
-            </View>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <OkButtonComponent
-                text="Accept"
-                onPress={() => {
-                  Accept();
-                }}
-                style={{ backgroundColor: "orange", width: "45%" }}
-              />
-              <OkButtonComponent
-                text="Cancel"
-                onPress={() => {
-                  Cancel();
-                }}
-                style={{ backgroundColor: "red", width: "45%" }}
-              />
             </View>
           </View>
         </View>
@@ -141,8 +98,8 @@ const styles = StyleSheet.create({
   },
   screen: {
     width: "100%",
-    height: Dimens.height / 2.5,
-    borderColor: "orange",
+    height: Dimens.height / 3.5,
+    borderColor: "red",
     borderWidth: 3,
     borderRadius: 6,
     marginBottom: 10,
@@ -161,11 +118,10 @@ const styles = StyleSheet.create({
     marginVertical: 1,
   },
   titleText: {
-    fontSize: 19,
+    fontSize: 18,
     fontWeight: "bold",
     color: "black",
     flex: 1,
-    marginBottom: 5,
   },
   text: {
     fontSize: 16,
@@ -174,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SellOrdersComponent;
+export default SellCOrdersComponent;

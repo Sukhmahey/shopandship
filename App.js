@@ -13,9 +13,11 @@ import BuyCartReducer from "./src/store/reducers/BuyCartReducer";
 import BuyPOrdersReducer from "./src/store/reducers/BuyPOrdersReducer";
 import BuyAOrdersReducer from "./src/store/reducers/BuyAOrdersReducer";
 import BuyDOrdersReducer from "./src/store/reducers/BuyDOrdersReducer";
+import BuyCOrdersReducer from "./src/store/reducers/BuyCOrdersReducer";
 import SellOrdersReducer from "./src/store/reducers/SellOrdersReducer";
 import SellAOrdersReducer from "./src/store/reducers/SellAOrdersReducer ";
 import SellDOrdersReducer from "./src/store/reducers/SellDOrdersReducer";
+import SellCOrdersReducer from "./src/store/reducers/SellCOrdersReducer";
 import MyShopIdReducer from "./src/store/reducers/MyShopIdReducer";
 
 const rootReducer = combineReducers({
@@ -27,9 +29,11 @@ const rootReducer = combineReducers({
   BuyPOrders: BuyPOrdersReducer,
   BuyAOrders: BuyAOrdersReducer,
   BuyDOrders: BuyDOrdersReducer,
+  BuyCOrders: BuyCOrdersReducer,
   SellOrders: SellOrdersReducer,
   SellAOrders: SellAOrdersReducer,
   SellDOrders: SellDOrdersReducer,
+  SellCOrders: SellCOrdersReducer,
   MyShopId: MyShopIdReducer,
 });
 

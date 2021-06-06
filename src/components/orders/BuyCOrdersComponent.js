@@ -18,13 +18,8 @@ import OkButtonComponent from "../OkButtonComponent";
 import { Entypo } from "@expo/vector-icons";
 
 import { useSelector, useDispatch } from "react-redux";
-import {
-  AddToSellAcceptedOrders,
-  AddToSellCancelledOrders,
-} from "../../store/actions/SellOrdersActions";
-import { RemoveFromBuyPOrders } from "../../store/actions/BuyPOrdersActions";
 
-const SellOrdersComponent = ({
+const BuyCOrdersComponent = ({
   photo,
   unit,
   name,
@@ -35,22 +30,9 @@ const SellOrdersComponent = ({
   shopUid,
   amount,
   color,
-  uid,
-  buyersPhone,
-  buyersAddress,
 }) => {
   const [counter, setCounter] = useState(amount / price);
   const dispatch = useDispatch();
-
-  const Accept = () => {
-    dispatch(AddToSellAcceptedOrders(shopId, productId, uid));
-    dispatch(RemoveFromBuyPOrders(productId));
-  };
-
-  const Cancel = () => {
-    dispatch(AddToSellCancelledOrders(shopId, productId, uid));
-    dispatch(RemoveFromBuyPOrders(productId));
-  };
 
   return (
     <View style={styles.screen}>
@@ -62,17 +44,7 @@ const SellOrdersComponent = ({
       >
         <View style={styles.viewsContainer}>
           <View style={styles.imageContainer}>
-            <CardView
-              cardElevation={6}
-              cardMaxElevation={6}
-              cornerRadius={6}
-              style={{
-                padding: 1,
-                borderWidth: 3,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <CardView cardElevation={6} cardMaxElevation={6} cornerRadius={6}>
               <Image
                 style={{ resizeMode: "center", height: "100%", width: "100%" }}
                 source={{
@@ -82,37 +54,12 @@ const SellOrdersComponent = ({
             </CardView>
           </View>
           <View style={styles.textContainer}>
-            <View style={{ flex: 3 }}>
-              <Text style={styles.titleText}>{name}</Text>
-              <Text style={styles.text}>
-                Price : {price}/{unit}
-              </Text>
-              <Text style={styles.text}>Units purchased: {counter}</Text>
-
-              <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
-            </View>
-            <View style={{ flex: 2.5 }}>
-              <Text style={styles.text}>Buyers phone no. : {buyersPhone}</Text>
-              <Text style={styles.text}>Buyers Address : {buyersAddress}</Text>
-            </View>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <OkButtonComponent
-                text="Accept"
-                onPress={() => {
-                  Accept();
-                }}
-                style={{ backgroundColor: "orange", width: "45%" }}
-              />
-              <OkButtonComponent
-                text="Cancel"
-                onPress={() => {
-                  Cancel();
-                }}
-                style={{ backgroundColor: "red", width: "45%" }}
-              />
-            </View>
+            <Text style={styles.titleText}>{name}</Text>
+            <Text style={styles.text}>
+              Price : {price}/{unit}
+            </Text>
+            <Text style={styles.text}>Description: {desc}</Text>
+            <Text style={styles.text}>Amount to be Paid: {amount} Rs</Text>
           </View>
         </View>
       </CardView>
@@ -141,8 +88,8 @@ const styles = StyleSheet.create({
   },
   screen: {
     width: "100%",
-    height: Dimens.height / 2.5,
-    borderColor: "orange",
+    height: Dimens.height / 5,
+    borderColor: "red",
     borderWidth: 3,
     borderRadius: 6,
     marginBottom: 10,
@@ -161,11 +108,10 @@ const styles = StyleSheet.create({
     marginVertical: 1,
   },
   titleText: {
-    fontSize: 19,
+    fontSize: 18,
     fontWeight: "bold",
     color: "black",
     flex: 1,
-    marginBottom: 5,
   },
   text: {
     fontSize: 16,
@@ -174,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SellOrdersComponent;
+export default BuyCOrdersComponent;

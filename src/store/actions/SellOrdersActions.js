@@ -93,6 +93,64 @@ export const AddToSellAcceptedOrders = (shopId, productId, buyUid) => {
     }
   };
 };
+export const AddToSellCancelledOrders = (shopId, productId, buyUid) => {
+  return async (dispatch) => {
+    const data = await getAsyncData();
+    if (data !== null) {
+      const uid = data.uid;
+      firestore()
+        .collection("users")
+        .doc(`${uid}`)
+        .collection("shops")
+        .doc(shopId)
+        .collection("pendingOrders")
+        .doc(productId)
+        .get()
+        .then((data) => {
+          const obj = data._data;
+          firestore()
+            .collection("users")
+            .doc(`${uid}`)
+            .collection("shops")
+            .doc(shopId)
+            .collection("cancelledOrders")
+            .add({
+              obj,
+            })
+            .then(() => {
+              const Bdata = obj;
+              firestore()
+                .collection("users")
+                .doc(`${buyUid}`)
+                .collection("cancelledOrders")
+                .add({
+                  Bdata,
+                })
+                .then(() => {
+                  firestore()
+                    .collection("users")
+                    .doc(`${uid}`)
+                    .collection("shops")
+                    .doc(shopId)
+                    .collection("pendingOrders")
+                    .doc(productId)
+                    .delete()
+                    .then(() => {
+                      dispatch({
+                        type: REMOVE_FROM_SELL_PORDERS,
+                        productId: productId,
+                      });
+                      console.log("Removed From Pending Order");
+                    })
+                    .catch((e) => {
+                      console.log("error removing from cart", e);
+                    });
+                });
+            });
+        });
+    }
+  };
+};
 
 // const AddToBuyAcceptedOrders = (Buid, Bdata, shopId) => {
 //   return async (dispatch) => {
