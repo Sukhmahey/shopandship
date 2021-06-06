@@ -69,10 +69,9 @@ const buyCancelledOrders = () => {
 const MyOrdersNav = () => {
   return (
     <toptab.Navigator
-      screenOptions={{
-        headerTitle: "BuyNav",
-        headerShown: false,
-        headerTintColor: Color.PRIMARY_COLOR,
+      tabBarOptions={{
+        activeTintColor: Color.PRIMARY_COLOR,
+        labelStyle: { fontSize: 12 },
       }}
     >
       <toptab.Screen name="Pending Orders" component={buyPendingOrders} />

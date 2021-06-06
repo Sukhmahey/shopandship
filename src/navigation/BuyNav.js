@@ -7,6 +7,9 @@ import BuyProductListScreen from "../screens/buy/BuyProductListScreen";
 import BuyCart from "../screens/buy/BuyCart";
 import MyOrdersNav from "./MyOrdersNav";
 
+import { Entypo } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+
 import Color from "../constants/Colors";
 
 const buyStack = createStackNavigator();
@@ -37,15 +40,43 @@ const buyOrders = () => {
 const BuyNav = () => {
   return (
     <buyBottomTab.Navigator
-      screenOptions={{
-        headerTitle: "BuyNav",
-        headerShown: false,
-        headerTintColor: Color.PRIMARY_COLOR,
+      tabBarOptions={{
+        activeTintColor: "white",
+        labelStyle: { fontSize: 12 },
+        inactiveTintColor: Color.PRIMARY_COLOR,
+        activeBackgroundColor: Color.PRIMARY_COLOR,
       }}
     >
-      <buyBottomTab.Screen name="BuyProductList" component={buyProductList} />
-      <buyBottomTab.Screen name="BuyCart" component={buyCart} />
-      <buyBottomTab.Screen name="MyOrders" component={MyOrdersNav} />
+      <buyBottomTab.Screen
+        name="BuyProductList"
+        component={buyProductList}
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="home" size={size} color={color} />
+          ),
+        }}
+      />
+      <buyBottomTab.Screen
+        name="BuyCart"
+        component={buyCart}
+        options={{
+          tabBarLabel: "Cart",
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="shopping-cart" size={size} color={color} />
+          ),
+        }}
+      />
+      <buyBottomTab.Screen
+        name="MyOrders"
+        component={MyOrdersNav}
+        options={{
+          tabBarLabel: "My Orders",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="shipping-fast" size={size} color={color} />
+          ),
+        }}
+      />
     </buyBottomTab.Navigator>
   );
 };
