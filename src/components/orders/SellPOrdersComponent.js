@@ -38,7 +38,7 @@ const SellOrdersComponent = ({
   const dispatch = useDispatch();
 
   const Accept = () => {
-    dispatch(AddToSellAcceptedOrders(shopId));
+    dispatch(AddToSellAcceptedOrders(shopId, productId, uid));
     dispatch(RemoveFromBuyPOrders(productId));
   };
 

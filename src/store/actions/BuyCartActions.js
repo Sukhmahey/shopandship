@@ -143,36 +143,6 @@ export const EmptyFirebaseCart = () => {
     const data = await getAsyncData();
     if (data !== null) {
       const uid = data.uid;
-      firestore()
-        .collection("users")
-        .doc(`${uid}`)
-        .collection("cart")
-        .onSnapshot(onResult, onError);
-
-      function onResult(QuerySnapshot) {
-        QuerySnapshot.forEach((element) => {
-          firestore()
-            .collection("users")
-            .doc(`${uid}`)
-            .collection("cart")
-            .doc(element.id)
-            .delete()
-            .then(() => {
-              // dispatch({
-              //   type: REMOVE_FROM_CART,
-              //   productId: productId,
-              // });
-              // console.log("Removed From Cart");
-            })
-            .catch((e) => {
-              console.log("error removing from cart", e);
-            });
-        });
-      }
-
-      function onError(error) {
-        console.error(error);
-      }
     }
   };
 };

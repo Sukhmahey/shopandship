@@ -56,8 +56,8 @@ const BuyCart = ({ navigation }) => {
       );
     } else {
       dispatch(AddToBuyersPOrders());
-      dispatch(ClearCart());
-      dispatch(EmptyFirebaseCart());
+      //dispatch(ClearCart());
+      // dispatch(EmptyFirebaseCart());
     }
   };
 

@@ -12,11 +12,12 @@ const SellPendingOrders = ({ navigation, route }) => {
   const { shopId } = route.params;
 
   const pOrders = useSelector((state) => state.SellOrders.sellPendingOrders);
+  console.log("Sell Pending Orders", pOrders);
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log("Sell ShopId", shopId);
     const unsubscribe = navigation.addListener("focus", () => {
       dispatch(GetSellPOrdersFromFirebase(shopId));
-      console.log("Pending Orders", pOrders);
     });
 
     // Return the function to unsubscribe from the event so it gets removed on unmount

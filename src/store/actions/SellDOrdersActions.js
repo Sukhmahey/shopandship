@@ -19,9 +19,21 @@ export const GetSellDOrdersFromFirebase = (shopId) => {
       function onResult(QuerySnapshot) {
         QuerySnapshot.forEach((element) => {
           console.log("A from firebase", element._data.obj);
+          const obj = {
+            amount: element._data.obj.amount,
+            productDescription: element._data.obj.productDescription,
+            productId: element.id,
+            productName: element._data.obj.productName,
+            productPhoto: element._data.obj.productPhoto,
+            productPrice: element._data.obj.productPrice,
+            productUnit: element._data.obj.productUnit,
+            shopId: element._data.obj.shopId,
+            shopUid: element._data.obj.shopUid,
+            uid: element._data.obj.uid,
+          };
           dispatch({
             type: GET_SD_ORDERS,
-            payload: element._data.obj,
+            payload: obj,
           });
         });
       }

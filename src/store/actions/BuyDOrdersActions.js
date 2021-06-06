@@ -17,9 +17,21 @@ export const GetDOrdersFromFirebase = () => {
       function onResult(QuerySnapshot) {
         QuerySnapshot.forEach((element) => {
           console.log("Delivered Orderssss", element._data.Bdata);
+          const obj = {
+            amount: element._data.Bdata.amount,
+            productDescription: element._data.Bdata.productDescription,
+            productId: element.id,
+            productName: element._data.Bdata.productName,
+            productPhoto: element._data.Bdata.productPhoto,
+            productPrice: element._data.Bdata.productPrice,
+            productUnit: element._data.Bdata.productUnit,
+            shopId: element._data.Bdata.shopId,
+            shopUid: element._data.Bdata.shopUid,
+            uid: element._data.Bdata.uid,
+          };
           dispatch({
             type: Get_D_ORDERS,
-            payload: element._data.Bdata,
+            payload: obj,
           });
         });
       }

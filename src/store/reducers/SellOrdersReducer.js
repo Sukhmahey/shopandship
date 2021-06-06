@@ -18,6 +18,7 @@ const SellOrdersReducer = (state = initialState, actions) => {
         cartObj.push(actions.payload);
         return { ...state, sellPendingOrders: cartObj };
       }
+
     case REMOVE_FROM_SELL_PORDERS:
       const removeProdIndex = state.sellPendingOrders.findIndex(
         (prod) => prod.productId === actions.productId

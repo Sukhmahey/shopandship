@@ -33,73 +33,11 @@ export const GetSellPOrdersFromFirebase = (shopId) => {
   };
 };
 
-export const AddToSellAcceptedOrders = (shopId) => {
+export const AddToSellAcceptedOrders = (shopId, productId, buyUid) => {
   return async (dispatch) => {
     const data = await getAsyncData();
     if (data !== null) {
       const uid = data.uid;
-      firestore()
-        .collection("users")
-        .doc(`${uid}`)
-        .collection("shops")
-        .doc(shopId)
-        .collection("pendingOrders")
-        .onSnapshot(onResult, onError);
-
-      function onResult(QuerySnapshot) {
-        QuerySnapshot.forEach((element) => {
-          const obj = element._data;
-
-          firestore()
-            .collection("users")
-            .doc(`${uid}`)
-            .collection("shops")
-            .doc(shopId)
-            .collection("AcceptedOrders")
-            .doc(element._data.productId)
-            .set({
-              obj,
-            })
-            .then(() => {
-              dispatch(AddToBuyAcceptedOrders(obj.uid, obj, shopId));
-            });
-        });
-      }
-
-      function onError(error) {
-        console.error(error);
-      }
-    }
-  };
-};
-
-const AddToBuyAcceptedOrders = (Buid, Bdata, shopId) => {
-  return async (dispatch) => {
-    const data = await getAsyncData();
-    if (data !== null) {
-      const uid = data.uid;
-
-      firestore()
-        .collection("users")
-        .doc(`${Buid}`)
-        .collection("AcceptedOrders")
-        .doc(Bdata.productId)
-        .set({
-          Bdata,
-        })
-        .then(() => {
-          dispatch(RemoveFromSellPOrders(shopId, Bdata.productId));
-        });
-    }
-  };
-};
-
-const RemoveFromSellPOrders = (shopId, productId) => {
-  return async (dispatch) => {
-    const data = await getAsyncData();
-    if (data !== null) {
-      const uid = data.uid;
-
       firestore()
         .collection("users")
         .doc(`${uid}`)
@@ -107,17 +45,71 @@ const RemoveFromSellPOrders = (shopId, productId) => {
         .doc(shopId)
         .collection("pendingOrders")
         .doc(productId)
-        .delete()
-        .then(() => {
-          dispatch({
-            type: REMOVE_FROM_SELL_PORDERS,
-            productId: productId,
-          });
-          console.log("Removed From Pending Order");
-        })
-        .catch((e) => {
-          console.log("error removing from cart", e);
+        .get()
+        .then((data) => {
+          const obj = data._data;
+          firestore()
+            .collection("users")
+            .doc(`${uid}`)
+            .collection("shops")
+            .doc(shopId)
+            .collection("AcceptedOrders")
+            .doc(productId)
+            .set({
+              obj,
+            })
+            .then(() => {
+              const Bdata = obj;
+              firestore()
+                .collection("users")
+                .doc(`${buyUid}`)
+                .collection("AcceptedOrders")
+                .doc(productId)
+                .set({
+                  Bdata,
+                })
+                .then(() => {
+                  firestore()
+                    .collection("users")
+                    .doc(`${uid}`)
+                    .collection("shops")
+                    .doc(shopId)
+                    .collection("pendingOrders")
+                    .doc(productId)
+                    .delete()
+                    .then(() => {
+                      dispatch({
+                        type: REMOVE_FROM_SELL_PORDERS,
+                        productId: productId,
+                      });
+                      console.log("Removed From Pending Order");
+                    })
+                    .catch((e) => {
+                      console.log("error removing from cart", e);
+                    });
+                });
+            });
         });
     }
   };
 };
+
+// const AddToBuyAcceptedOrders = (Buid, Bdata, shopId) => {
+//   return async (dispatch) => {
+//     const data = await getAsyncData();
+//     if (data !== null) {
+//       const uid = data.uid;
+
+//     }
+//   };
+// };
+
+// const RemoveFromSellPOrders = (shopId, productId) => {
+//   return async (dispatch) => {
+//     const data = await getAsyncData();
+//     if (data !== null) {
+//       const uid = data.uid;
+
+//     }
+//   };
+// };

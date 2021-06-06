@@ -1,5 +1,6 @@
 import firestore from "@react-native-firebase/firestore";
 import { getAsyncData } from "../../api/AsyncData";
+import { REMOVE_FROM_CART } from "../actions/BuyCartActions";
 
 export const Get_P_ORDERS = "get_p_orders";
 export const Get_A_ORDERS = "get_a_orders";
@@ -19,8 +20,44 @@ export const AddToBuyersPOrders = () => {
       function onResult(QuerySnapshot) {
         QuerySnapshot.forEach((element) => {
           console.log("ShopUid", element._data.shopUid);
-          dispatch(AddToSellersPOrders(element._data));
+          dispatch(AddToSellersPOrders(element));
+        });
+      }
 
+      function onError(error) {
+        console.error(error);
+      }
+    }
+  };
+};
+
+const AddToSellersPOrders = (element) => {
+  return async (dispatch) => {
+    const data = await getAsyncData();
+    if (data !== null) {
+      const uid = data.uid;
+
+      firestore()
+        .collection("users")
+        .doc(element._data.shopUid)
+        .collection("shops")
+        .doc(element._data.shopId)
+        .collection("pendingOrders")
+        .doc(element._data.productId)
+        .set({
+          uid: uid,
+          shopUid: element._data.shopUid,
+          shopId: element._data.shopId,
+          productDescription: element._data.productDescription,
+          productId: element._data.productId,
+          productName: element._data.productName,
+          productPhoto: element._data.productPhoto,
+          productPrice: element._data.productPrice,
+          productUnit: element._data.productUnit,
+          amount: element._data.amount,
+        })
+
+        .then(() => {
           firestore()
             .collection("users")
             .doc(`${uid}`)
@@ -38,46 +75,28 @@ export const AddToBuyersPOrders = () => {
               productUnit: element._data.productUnit,
               amount: element._data.amount,
             })
-            .then(() => {})
+            .then(() => {
+              firestore()
+                .collection("users")
+                .doc(`${uid}`)
+                .collection("cart")
+                .doc(element.id)
+                .delete()
+                .then(() => {
+                  dispatch({
+                    type: REMOVE_FROM_CART,
+                    productId: element.id,
+                  });
+                  console.log("Removed From Cart");
+                })
+                .catch((e) => {
+                  console.log("error removing from cart", e);
+                });
+            })
             .catch((e) => {
               console.log("error removing from cart", e);
             });
-        });
-      }
-
-      function onError(error) {
-        console.error(error);
-      }
-    }
-  };
-};
-
-const AddToSellersPOrders = (Pdata) => {
-  return async (dispatch) => {
-    const data = await getAsyncData();
-    if (data !== null) {
-      const uid = data.uid;
-
-      firestore()
-        .collection("users")
-        .doc(Pdata.shopUid)
-        .collection("shops")
-        .doc(Pdata.shopId)
-        .collection("pendingOrders")
-        .doc(Pdata.productId)
-        .set({
-          uid: uid,
-          shopUid: Pdata.shopUid,
-          shopId: Pdata.shopId,
-          productId: Pdata.productId,
-          productName: Pdata.productName,
-          productPhoto: Pdata.productPhoto,
-          productPrice: Pdata.productPrice,
-          productUnit: Pdata.productUnit,
-          productDescription: Pdata.productDescription,
-          amount: Pdata.amount,
         })
-        .then(() => {})
         .catch((e) => {
           console.log("error removing from cart", e);
         });

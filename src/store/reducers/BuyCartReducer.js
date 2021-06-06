@@ -47,8 +47,9 @@ const BuyCartReducer = (state = initialState, actions) => {
 
     case UPDATE_TOTAL_CART_PRICE:
       return { ...state, cartPrice: actions.amount };
+
     case CLEAR_CART:
-      return { ...state, cartProducts: [] };
+      return { cartProducts: [] };
 
     default:
       return state;
