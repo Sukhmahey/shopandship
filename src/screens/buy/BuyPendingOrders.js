@@ -5,20 +5,23 @@ import BuyPOrdersComponent from "../../components/orders/BuyPOrdersComponent";
 import Color from "../../constants/Colors";
 
 import { useSelector, useDispatch } from "react-redux";
-import { GetPOrdersFromFirebase } from "../../store/actions/BuyPOrdersActions";
+import {
+  GetPOrdersFromFirebase,
+  ClearPOrders,
+} from "../../store/actions/BuyPOrdersActions";
 
 const BuyPendingOrders = ({ navigation }) => {
   const pOrders = useSelector((state) => state.BuyPOrders.pendingOrders);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      dispatch(GetPOrdersFromFirebase());
+      dispatch(ClearPOrders());
       console.log("Pending Orders", pOrders);
     });
-
-    // Return the function to unsubscribe from the event so it gets removed on unmount
     return unsubscribe;
-  }, [navigation]);
+  }, [navigation, pOrders]);
+
   if (pOrders.length < 1) {
     return (
       <View style={styles.itemContainer}>

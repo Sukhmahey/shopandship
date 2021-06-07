@@ -1,8 +1,10 @@
 import firestore from "@react-native-firebase/firestore";
+import React, { useState } from "react";
 import { getAsyncData } from "../../api/AsyncData";
 
 export const Get_P_ORDERS = "get_p_orders";
 export const Get_A_ORDERS = "get_a_orders";
+export const CLEAR_PORDERS = "clear_porders";
 export const REMOVE_FROM_BUY_PORDERS = "remove_p_orders";
 
 export const AddToBuyersPOrders = () => {
@@ -117,11 +119,14 @@ export const GetPOrdersFromFirebase = () => {
         .onSnapshot(onResult, onError);
 
       function onResult(QuerySnapshot) {
+        let object = [];
         QuerySnapshot.forEach((element) => {
-          dispatch({
-            type: Get_P_ORDERS,
-            payload: element._data,
-          });
+          object.push(element._data);
+        });
+        console.log("object", object);
+        dispatch({
+          type: Get_P_ORDERS,
+          payload: object,
         });
       }
 
@@ -138,5 +143,13 @@ export const RemoveFromBuyPOrders = (productId) => {
       type: REMOVE_FROM_BUY_PORDERS,
       productId: productId,
     });
+  };
+};
+export const ClearPOrders = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: CLEAR_PORDERS,
+    });
+    dispatch(GetPOrdersFromFirebase());
   };
 };

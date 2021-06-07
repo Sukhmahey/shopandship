@@ -45,12 +45,10 @@ const SellOrdersComponent = ({
   const Accept = () => {
     console.log("Uid to delete", uid);
     dispatch(AddToSellAcceptedOrders(shopId, productId, uid));
-    dispatch(RemoveFromBuyPOrders(productId));
   };
 
   const Cancel = () => {
     dispatch(AddToSellCancelledOrders(shopId, productId, uid));
-    dispatch(RemoveFromBuyPOrders(productId));
   };
 
   return (

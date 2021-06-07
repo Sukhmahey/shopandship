@@ -18,11 +18,16 @@ export const GetAOrdersFromFirebase = () => {
 
       function onResult(QuerySnapshot) {
         QuerySnapshot.forEach((element) => {
-          console.log("Accepted Orderssss", element._data.Bdata);
+          let object = [];
+          QuerySnapshot.forEach((element) => {
+            object.push(element._data.Bdata);
+          });
+          console.log("object", object);
           dispatch({
             type: Get_A_ORDERS,
-            payload: element._data.Bdata,
+            payload: object,
           });
+          console.log("Accepted Orderssss", element._data.Bdata);
         });
       }
 
