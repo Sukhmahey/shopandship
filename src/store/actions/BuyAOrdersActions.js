@@ -3,6 +3,7 @@ import { getAsyncData } from "../../api/AsyncData";
 
 export const Get_P_ORDERS = "get_p_orders";
 export const Get_A_ORDERS = "get_a_orders";
+export const CLEAR_AORDERS = "clear_aorders";
 export const REMOVE_FROM_BUY_AORDERS = "remove_p_orders";
 
 export const GetAOrdersFromFirebase = () => {
@@ -56,5 +57,14 @@ export const RemoveFromBuyAOrders = (productId, buyUid) => {
       .catch((e) => {
         console.log("error removing from cart", e);
       });
+  };
+};
+
+export const ClearAOrders = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: CLEAR_AORDERS,
+    });
+    dispatch(GetAOrdersFromFirebase());
   };
 };

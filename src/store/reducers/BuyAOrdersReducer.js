@@ -1,6 +1,7 @@
 import {
   Get_P_ORDERS,
   Get_A_ORDERS,
+  CLEAR_AORDERS,
   REMOVE_FROM_BUY_AORDERS,
 } from "../actions/BuyAOrdersActions";
 
@@ -22,6 +23,9 @@ const BuyAOrdersReducer = (state = initialState, actions) => {
         removedCart.splice(removeProdIndex, 1);
         return { ...state, acceptedOrders: removedCart };
       }
+
+    case CLEAR_AORDERS:
+      return { acceptedOrders: [] };
 
     default:
       return state;

@@ -5,14 +5,17 @@ import BuyAOrdersComponent from "../../components/orders/BuyAOrdersComponent";
 import Color from "../../constants/Colors";
 
 import { useSelector, useDispatch } from "react-redux";
-import { GetAOrdersFromFirebase } from "../../store/actions/BuyAOrdersActions";
+import {
+  GetAOrdersFromFirebase,
+  ClearAOrders,
+} from "../../store/actions/BuyAOrdersActions";
 
 const BuyAcceptedOrders = ({ navigation }) => {
   const aOrders = useSelector((state) => state.BuyAOrders.acceptedOrders);
   const dispatch = useDispatch();
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      dispatch(GetAOrdersFromFirebase());
+      dispatch(ClearAOrders());
       console.log("Acepted Orders", aOrders);
     });
 
