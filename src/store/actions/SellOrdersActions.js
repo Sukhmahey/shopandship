@@ -86,12 +86,12 @@ export const AddToSellAcceptedOrders = (shopId, productId, buyUid) => {
                       });
                       firestore()
                         .collection("users")
-                        .doc(`${uid}`)
+                        .doc(`${buyUid}`)
                         .collection("pendingOrders")
                         .doc(productId)
                         .delete()
                         .then(() => {
-                          console.log("Removed From Pending Order");
+                          console.log("Removed From Buy Pending Order");
                         })
                         .catch((e) => {
                           console.log("error removing from cart", e);
@@ -157,7 +157,7 @@ export const AddToSellCancelledOrders = (shopId, productId, buyUid) => {
                     .then(() => {
                       firestore()
                         .collection("users")
-                        .doc(`${uid}`)
+                        .doc(`${buyUid}`)
                         .collection("pendingOrders")
                         .doc(productId)
                         .delete()

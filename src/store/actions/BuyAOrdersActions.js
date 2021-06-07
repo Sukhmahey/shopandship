@@ -33,28 +33,23 @@ export const GetAOrdersFromFirebase = () => {
   };
 };
 
-export const RemoveFromBuyAOrders = (productId) => {
+export const RemoveFromBuyAOrders = (productId, buyUid) => {
   return async (dispatch) => {
-    const data = await getAsyncData();
-    if (data !== null) {
-      const uid = data.uid;
-
-      firestore()
-        .collection("users")
-        .doc(`${uid}`)
-        .collection("AcceptedOrders")
-        .doc(productId)
-        .delete()
-        .then(() => {
-          dispatch({
-            type: REMOVE_FROM_BUY_AORDERS,
-            productId: productId,
-          });
-          console.log("Removed From Pending Order");
-        })
-        .catch((e) => {
-          console.log("error removing from cart", e);
+    firestore()
+      .collection("users")
+      .doc(`${buyUid}`)
+      .collection("AcceptedOrders")
+      .doc(productId)
+      .delete()
+      .then(() => {
+        dispatch({
+          type: REMOVE_FROM_BUY_AORDERS,
+          productId: productId,
         });
-    }
+        console.log("Removed From Pending Order");
+      })
+      .catch((e) => {
+        console.log("error removing from cart", e);
+      });
   };
 };

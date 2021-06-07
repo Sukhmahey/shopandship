@@ -41,7 +41,7 @@ const SellOrdersComponent = ({
 
   const Delivered = () => {
     dispatch(AddToSellDeliveredOrders(shopId, productId, uid));
-    dispatch(RemoveFromBuyAOrders(productId));
+    dispatch(RemoveFromBuyAOrders(productId, uid));
   };
 
   return (
