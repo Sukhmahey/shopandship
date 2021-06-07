@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Image } from "react-native";
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -20,14 +20,19 @@ const AuthScreen = ({ navigation }) => {
 
   return (
     <View style={styles.screen}>
-      <GoogleSigninButton
-        style={{ width: 192, height: 48 }}
-        size={GoogleSigninButton.Size.Wide}
-        color={GoogleSigninButton.Color.Dark}
-        onPress={() => {
-          signIn();
-        }}
-      />
+      <View style={styles.imageContainer}>
+        <Image style={styles.logo} source={require("../assets/homeapp.png")} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <GoogleSigninButton
+          style={{ width: 192, height: 48 }}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Dark}
+          onPress={() => {
+            signIn();
+          }}
+        />
+      </View>
     </View>
   );
 };
@@ -35,8 +40,21 @@ const AuthScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    backgroundColor: "white",
+  },
+  imageContainer: {
+    flex: 6,
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonContainer: {
+    flex: 4,
+
+    alignItems: "center",
+  },
+  logo: {
+    width: "100%",
+    height: "100%",
   },
 });
 

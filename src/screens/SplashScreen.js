@@ -37,10 +37,10 @@ const SplashScreen = ({ navigation }) => {
     <AnimatedSplash
       translucent={true}
       isLoaded={true}
-      logoImage={require("../assets/splash.png")}
-      backgroundColor={"#262626"}
-      logoHeight={600}
-      logoWidth={600}
+      logoImage={require("../assets/homeapp.png")}
+      backgroundColor={"white"}
+      logoHeight={200}
+      logoWidth={200}
     ></AnimatedSplash>
   );
 };
