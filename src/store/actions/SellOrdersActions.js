@@ -48,6 +48,7 @@ export const AddToSellAcceptedOrders = (shopId, productId, buyUid) => {
         .get()
         .then((data) => {
           const obj = data._data;
+          console.log("obj", obj);
           firestore()
             .collection("users")
             .doc(`${uid}`)
@@ -60,6 +61,7 @@ export const AddToSellAcceptedOrders = (shopId, productId, buyUid) => {
             })
             .then(() => {
               const Bdata = obj;
+              console.log("Bdata", obj);
               firestore()
                 .collection("users")
                 .doc(`${buyUid}`)
@@ -82,6 +84,19 @@ export const AddToSellAcceptedOrders = (shopId, productId, buyUid) => {
                         type: REMOVE_FROM_SELL_PORDERS,
                         productId: productId,
                       });
+                      firestore()
+                        .collection("users")
+                        .doc(`${uid}`)
+                        .collection("pendingOrders")
+                        .doc(productId)
+                        .delete()
+                        .then(() => {
+                          console.log("Removed From Pending Order");
+                        })
+                        .catch((e) => {
+                          console.log("error removing from cart", e);
+                        });
+
                       console.log("Removed From Pending Order");
                     })
                     .catch((e) => {
@@ -140,6 +155,18 @@ export const AddToSellCancelledOrders = (shopId, productId, buyUid) => {
                     .doc(productId)
                     .delete()
                     .then(() => {
+                      firestore()
+                        .collection("users")
+                        .doc(`${uid}`)
+                        .collection("pendingOrders")
+                        .doc(productId)
+                        .delete()
+                        .then(() => {
+                          console.log("Removed From Pending Order");
+                        })
+                        .catch((e) => {
+                          console.log("error removing from cart", e);
+                        });
                       console.log("Removed From Pending Order");
                     })
                     .catch((e) => {

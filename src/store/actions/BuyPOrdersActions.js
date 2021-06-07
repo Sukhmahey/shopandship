@@ -134,26 +134,9 @@ export const GetPOrdersFromFirebase = () => {
 
 export const RemoveFromBuyPOrders = (productId) => {
   return async (dispatch) => {
-    const data = await getAsyncData();
-    if (data !== null) {
-      const uid = data.uid;
-
-      firestore()
-        .collection("users")
-        .doc(`${uid}`)
-        .collection("pendingOrders")
-        .doc(productId)
-        .delete()
-        .then(() => {
-          dispatch({
-            type: REMOVE_FROM_BUY_PORDERS,
-            productId: productId,
-          });
-          console.log("Removed From Pending Order");
-        })
-        .catch((e) => {
-          console.log("error removing from cart", e);
-        });
-    }
+    dispatch({
+      type: REMOVE_FROM_BUY_PORDERS,
+      productId: productId,
+    });
   };
 };
