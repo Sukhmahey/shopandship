@@ -80,7 +80,7 @@ const ProductBuyCardComponent = ({
                 <OkButtonComponent
                   text="Remove from Cart"
                   onPress={() => {
-                    console.log("Add to cart pressed");
+                    console.log("REMOVE to cart pressed");
                     dispatch(RemoveFromCart(productId));
                   }}
                   style={{
