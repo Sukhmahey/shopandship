@@ -7,6 +7,8 @@ import PlusIconComponent from "../../components/PlusIconComponent";
 import { GetAllProducts } from "../../store/actions/ProductActions";
 import { useSelector, useDispatch } from "react-redux";
 
+import Color from "../../constants/Colors";
+
 const SellProductListScreen = ({ navigation, route }) => {
   const { shopId, name, address, phone } = route.params;
   const dispatch = useDispatch();
@@ -34,6 +36,13 @@ const SellProductListScreen = ({ navigation, route }) => {
       ),
     });
   }, [navigation]);
+  if (allProducts.length < 1) {
+    return (
+      <View style={styles.itemContainer}>
+        <Text style={styles.textEmpty}>Lets Add Your First product!</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.screen}>
       <FlatList
@@ -62,6 +71,18 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     marginHorizontal: 10,
+  },
+  itemContainer: {
+    flex: 1,
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+  },
+  textEmpty: {
+    color: Color.PRIMARY_COLOR,
+    fontSize: 20,
+    margin: 10,
   },
 });
 

@@ -62,7 +62,7 @@ const EditShopScreen = ({ navigation, route }) => {
       productUnit: unit,
     });
     console.log(shopId, productId);
-  }, []);
+  }, [navigation]);
   useEffect(() => {
     if (imageAdded) {
       UpdateProduct(
@@ -255,6 +255,7 @@ const EditShopScreen = ({ navigation, route }) => {
                       <Picker.Item label="/packet" value="pkt" />
                       <Picker.Item label="/Unit" value="unit" />
                       <Picker.Item label="/Item" value="item" />
+                      <Picker.Item label="/Piece" value="piece" />
                     </Picker>
                   }
                 />

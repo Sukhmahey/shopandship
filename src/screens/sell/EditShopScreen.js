@@ -46,19 +46,19 @@ const EditShopScreen = ({ navigation, route }) => {
     shopId: "",
     shopDescription: "",
   });
-  const { name, phone, address, photo, id, desc } = route.params;
-
+  const { name, phone, address, photo, shopId, desc } = route.params;
+  console.log(shopId);
   useEffect(() => {
     setShopData({
       ...shopData,
       shopName: name,
       shopAddress: address,
       shopDescription: desc,
-      shopId: id,
+      shopId: shopId,
       shopPhone: phone,
       shopPhoto: photo,
     });
-  }, []);
+  }, [navigation]);
   useEffect(() => {
     if (imageAdded) {
       UpdateShop(shopData.shopId, shopData, navigation);
@@ -138,7 +138,7 @@ const EditShopScreen = ({ navigation, route }) => {
       headerRight: () => (
         <HeaderIconComponent
           onPress={() => {
-            DeleteShop(id, navigation);
+            DeleteShop(shopId, navigation);
           }}
           icon={<Entypo name="trash" size={24} color={Color.PRIMARY_COLOR} />}
         />
