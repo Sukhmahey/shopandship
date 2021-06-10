@@ -76,7 +76,7 @@ const ShopSellCardComponent = ({
                 phone,
                 address,
                 photo,
-                id,
+                shopId,
                 desc,
               });
             }}
