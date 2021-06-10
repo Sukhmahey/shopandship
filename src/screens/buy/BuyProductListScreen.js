@@ -24,8 +24,10 @@ const BuyProductListScreen = ({ navigation }) => {
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-
   const dispatch = useDispatch();
+  const all = useSelector((state) => state.BuyShop.allProducts);
+  console.log("all prods", all);
+
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       dispatch(BuyGetAllShops());
@@ -35,6 +37,18 @@ const BuyProductListScreen = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
+  const onStart = () => {
+    setMasterDataSource(all);
+    searchFilterFunction("");
+    setFilteredDataSource(all);
+
+    console.log("filtered", filteredDataSource);
+  };
+
+  useEffect(() => {
+    onStart();
+  }, [all]);
+
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       dispatch(GetCartFromFirebase());
@@ -43,12 +57,6 @@ const BuyProductListScreen = ({ navigation }) => {
     // Return the function to unsubscribe from the event so it gets removed on unmount
     return unsubscribe;
   }, [navigation]);
-  const all = useSelector((state) => state.BuyShop.allProducts);
-  useEffect(() => {
-    setFilteredDataSource(all);
-    setMasterDataSource(all);
-    searchFilterFunction("");
-  }, [all]);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
